@@ -18,7 +18,7 @@
             <div class="h-16 flex items-center justify-center border-b border-gray-200">
                 <!-- Logo -->
                 <a href="{{ route('admin.dashboard') }}" class="text-xl font-semibold text-gray-800">
-                    Admin Panel
+                    Admin Panel-1
                 </a>
             </div>
             <ul class="mt-4">
