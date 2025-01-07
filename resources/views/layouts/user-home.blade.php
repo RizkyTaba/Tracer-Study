@@ -3,13 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Panel')</title>
+    <title>@yield('title', 'User Panel')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        a {
-            text-decoration: none !important;
-        }
-    </style>
 </head>
 <body>
     <div class="flex h-screen bg-gray-100">
@@ -17,14 +12,14 @@
         <nav class="w-64 bg-white border-r border-gray-200">
             <div class="h-16 flex items-center justify-center border-b border-gray-200">
                 <!-- Logo -->
-                <a href="{{ route('admin.dashboard') }}" class="text-xl font-semibold text-gray-800">
-                    Admin Panel
+                <a href="{{ route('dashboard') }}" class="text-xl font-semibold text-gray-800">
+                    User Panel
                 </a>
             </div>
             <ul class="mt-4">
                 <!-- Dashboard Link -->
                 <li>
-                    <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
+                    <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
                         {{ __('Dashboard') }}
                     </a>
                 </li>
@@ -52,7 +47,7 @@
         <main class="flex-1 flex flex-col">
             <!-- Top Navigation -->
             <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <h1 class="text-lg font-semibold text-gray-800"></h1>
                     <div>
                         @auth
