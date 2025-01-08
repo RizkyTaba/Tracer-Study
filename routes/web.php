@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AlumniController; // Add this line
+use App\Http\Controllers\SettingsController; // Add this line
+use App\Http\Controllers\SekolahController; // Add this line
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
