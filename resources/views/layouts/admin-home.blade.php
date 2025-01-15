@@ -57,6 +57,28 @@
                     </a>
                 </li>
 
+                <!-- Tahun Lulus Link -->
+                <li>
+                    <a href="{{ route('tahun_lulus.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
+                        {{ __('Tahun Lulus') }}
+                    </a>
+                </li>
+
+                <!-- Bidang keahlian Link -->
+                <li>
+                    <a href="{{ route('bidang_keahlian.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
+                        {{ __('Bidang Keahlian') }}
+                    </a>
+                </li>
+
+                <!-- Program keahlian Link -->
+                <li>
+                    <a href="{{ route('program_keahlian.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
+                        {{ __('Program Keahlian') }}
+                    </a>
+                </li>
+                
+
                 <!-- Profile Link -->
                 <li>
                     <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
