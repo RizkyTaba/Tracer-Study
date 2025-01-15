@@ -14,17 +14,20 @@
             top: 0;
             bottom: 0;
             overflow-y: auto;
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
         }
         main {
             margin-left: 16rem; /* Adjust based on the width of the nav */
+            background-color: #f9fafb;
         }
         pre {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: #f8f9fa;
+            background: #ffffff;
             padding: 1rem;
-            border-top: 1px solid #dee2e6;
+            border-top: 1px solid #e5e7eb;
             overflow-x: auto;
         }
     </style>
@@ -49,8 +52,8 @@
 
                 <!-- Alumni Link -->
                 <li>
-                    <a href="{{ route('sekolah.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
-                        {{ __('Sekolah') }}
+                    <a href="{{ route('alumni.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
+                        {{ __('Alumni') }}
                     </a>
                 </li>
 
@@ -91,6 +94,8 @@
             <!-- Dynamic Content -->
             <section class="flex-1 p-4">
                 @yield('content')
+                <!-- Remove the undefined $slot variable -->
+                {{-- {{ $slot }} --}}
             </section>
         </main>
     </div>

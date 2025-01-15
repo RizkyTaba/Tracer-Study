@@ -29,7 +29,8 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <!-- Remove the undefined $slot variable -->
+                {{-- {{ $slot }} --}}
             </main>
         </div>
     </body>
