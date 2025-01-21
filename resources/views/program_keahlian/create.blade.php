@@ -31,7 +31,7 @@
             <select class="form-control" id="id_bidang_keahlian" name="id_bidang_keahlian">
                 <option value="">-- Pilih Bidang Keahlian --</option>
                 @foreach ($bidangKeahlians as $bidangKeahlian)
-                    <option value="{{ $bidangKeahlian->id_bidang_keahlian }}" {{ old('id_bidang_keahlian') == $bidangKeahlian->id_bidang_keahlian ? 'selected' : '' }}>{{ $bidangKeahlian->kode_bidang_keahlian }}</option>
+                    <option value="{{ $bidangKeahlian->id_bidang_keahlian }}" {{ old('id_bidang_keahlian') == $bidangKeahlian->id_bidang_keahlian ? 'selected' : '' }}>{{ $bidangKeahlian->bidang_keahlian }}</option>
                 @endforeach
             </select>
             @error('id_bidang_keahlian')

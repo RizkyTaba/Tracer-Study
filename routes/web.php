@@ -4,7 +4,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\BidangKeahlianController;
+use App\Http\Controllers\KonsentrasiKeahlianController;
 use App\Http\Controllers\TahunLulusController;
+use App\Http\Controllers\StatusAlumniController;
+use App\Http\Controllers\TracerKuliahController;
+use App\Http\Controllers\TracerKerjaController;
+use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProgramKeahlianController;
 
@@ -26,14 +31,23 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
-    // Alumni
+    // // Alumni
     Route::get('/admin/alumni', [AlumniController::class, 'index'])->name('alumni.index');
     Route::get('/admin/alumni/create', [AlumniController::class, 'create'])->name('alumni.create');
     Route::post('/admin/alumni', [AlumniController::class, 'store'])->name('alumni.store');
     Route::get('/admin/alumni/{alumni}/edit', [AlumniController::class, 'edit'])->name('alumni.edit');
-    Route::put('/admin/alumni/{alumni}', [AlumniController::class, 'update'])->name('alumni.update');
-    Route::delete('/admin/alumni/{alumni}', [AlumniController::class, 'destroy'])->name('alumni.destroy');
+    Route::put('admin/alumni/{alumni}', [AlumniController::class, 'update'])->name('alumni.update');
+    Route::delete('admin/alumni/{alumni}', [AlumniController::class, 'destroy'])->name('alumni.destroy');
+    Route::get('<admin>alumni/{id}', [AlumniController::class, 'show'])->name('alumni.show');
+    Route::resource('alumni', AlumniController::class);
     // ----------------
+
+    // Tahun Lulus
+    Route::resource('tahun_lulus', TahunLulusController::class);
+    Route::get('/tahun_lulus/create', [TahunLulusController::class, 'create'])->name('tahun_lulus.create');
+    Route::get('/tahun_lulus/{tahun_lulus}/edit', [TahunLulusController::class, 'edit'])->name('tahun_lulus.edit');
+    //----------------
+
 
     // Bidang Keahlian
     Route::get('/admin/bidang_keahlian', [BidangKeahlianController::class, 'index'])->name('bidang_keahlian.index');
@@ -56,7 +70,39 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     Route::resource('admin/tahun_lulus', TahunLulusController::class);
     //----------------
 
-    
+    // Konsentrasi Keahlian
+    Route::get('admin/konsentrasi_keahlian', [KonsentrasiKeahlianController::class, 'index'])->name('konsentrasi_keahlian.index');
+    Route::get('admin/konsentrasi_keahlian/create', [KonsentrasiKeahlianController::class, 'create'])->name('konsentrasi_keahlian.create');
+    Route::get('admin/konsentrasi_keahlian/{konsentrasi_keahlian}/edit', [KonsentrasiKeahlianController::class, 'edit'])->name('konsentrasi_keahlian.edit');
+    Route::resource('admin/konsentrasi_keahlian', KonsentrasiKeahlianController::class);
+    //----------------
+
+    // Status Alumni
+    Route::get('admin/status_alumni', [StatusAlumniController::class, 'index'])->name('status_alumni.index');
+    Route::get('admin/status_alumni/create', [StatusAlumniController::class, 'create'])->name('status_alumni.create');
+    Route::get('admin/status_alumni/{status_alumni}/edit', [StatusAlumniController::class, 'edit'])->name('status_alumni.edit');
+    Route::resource('admin/status_alumni', StatusAlumniController::class);
+
+     // Tracer Kuliah
+     Route::get('admin/tracer_kuliah', [TracerKuliahController::class, 'index'])->name('tracer_kuliah.index');
+     Route::resource('tracer_kuliah', TracerKuliahController::class)->except(['index']);
+ 
+     // Tracer Kerja
+     Route::get('admin/tracer_kerja', [TracerKerjaController::class, 'index'])->name('tracer_kerja.index');
+     Route::resource('tracer_kerja', TracerKerjaController::class)->except(['index']);
+ 
+     // Testimoni
+     Route::get('admin/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
+     Route::resource('testimoni', TestimoniController::class)->except(['index']);
+});
+
+// In 'routes/auth_routes.php'
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // ----------------
+
 });
 
 require __DIR__.'/auth.php';

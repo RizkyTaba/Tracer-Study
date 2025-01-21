@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ProgramKeahlian;
 use App\Models\BidangKeahlian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProgramKeahlianController extends Controller
 {
@@ -64,6 +65,8 @@ class ProgramKeahlianController extends Controller
     public function destroy(ProgramKeahlian $programKeahlian)
     {
         $programKeahlian->delete();
+
+        DB::statement('ALTER TABLE tbl_bidang_keahlian AUTO_INCREMENT = 1');
 
         return redirect()->route('program_keahlian.index')
                          ->with('success', 'Program Keahlian deleted successfully');

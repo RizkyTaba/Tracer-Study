@@ -1,5 +1,7 @@
 @extends('layouts.admin-home')
 
+@section('title', 'Daftar Bidang Keahlian')
+
 @section('content')
 <div class="container mx-auto mt-4">
     <h1 class="text-2xl font-semibold mb-4 text-center">Daftar Bidang Keahlian</h1>

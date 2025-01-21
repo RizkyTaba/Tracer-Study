@@ -1,13 +1,11 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Daftar Alumni')
-
 @section('content')
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
-        <h2>Daftar Alumni</h2>
-        <a href="{{ route('alumni.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus mr-2"></i> Tambah Alumni
+        <h2>Daftar Testimoni</h2>
+        <a href="{{ route('testimoni.create') }}" class="btn btn-primary">
+            <i class="fa fa-plus mr-2"></i> Tambah Testimoni
         </a>
     </div>
     @if (session('success'))
@@ -17,28 +15,24 @@
         <thead class="thead-dark">
             <tr>
                 <th>#</th>
-                <th>NISN</th>
-                <th>Nama Lengkap</th>
-                <th>Jenis Kelamin</th>
-                <th>No HP</th>
-                <th>Email</th>
+                <th>Alumni</th>
+                <th>Testimoni</th>
+                <th>Tanggal Testimoni</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($alumni as $item)
+            @foreach ($testimoni as $item)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->nisn }}</td>
-                <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
-                <td>{{ $item->jenis_kelamin }}</td>
-                <td>{{ $item->no_hp }}</td>
-                <td>{{ $item->email }}</td>
+                <td>{{ $item->alumni->nama_depan }} {{ $item->alumni->nama_belakang }}</td>
+                <td>{{ $item->testimoni }}</td>
+                <td>{{ $item->tgl_testimoni }}</td>
                 <td>
-                    <a href="{{ route('alumni.edit', $item->id_alumni) }}" class="btn btn-warning btn-sm">
+                    <a href="{{ route('testimoni.edit', $item->id_testimoni) }}" class="btn btn-warning btn-sm">
                         <i class="fa fa-edit"></i> Edit
                     </a>
-                    <form action="{{ route('alumni.destroy', $item->id_alumni) }}" method="POST" style="display:inline-block;">
+                    <form action="{{ route('testimoni.destroy', $item->id_testimoni) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">

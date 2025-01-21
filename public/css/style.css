@@ -1,0 +1,199 @@
+nav ul li a {
+    display: flex; /* Membuat elemen <a> mengisi seluruh elemen <li> */
+    align-items: center; /* Menyelaraskan teks secara vertikal */
+    width: 100%; /* Memastikan <a> mengisi lebar penuh dari <li> */
+    padding: 0.75rem 1rem; /* Tambahkan jarak untuk klik yang lebih nyaman */
+    box-sizing: border-box; /* Memastikan padding dihitung dengan benar */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 17rem;
+    overflow-y: auto;
+    background-color: #1f2937;
+    color: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    transition: width 0.3s ease;
+}
+
+nav:hover {
+    width: 18rem;
+}
+
+nav a {
+    color: #d1d5db;
+    font-size: 1rem;
+    display: block; /* Ensure links are block elements for better click area */
+    padding: 0.5rem 1rem; /* Added padding for better spacing */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
+}
+
+nav a:hover {
+    color: #ffffff;
+    background-color: #4b5563;
+}
+
+nav .sidebar-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 1rem;
+    margin-bottom: 1rem; /* Added margin for better spacing */
+    border-bottom: 1px solid #e5e7eb; /* Added border for better separation */
+}
+
+nav .sidebar-header a {
+    color: #ffffff;
+}
+
+main {
+    margin-left: 16rem;
+    padding: 1rem;
+    background-color: #f3f4f6;
+    transition: margin-left 0.3s ease;
+}
+
+nav:hover + main {
+    margin-left: 18rem;
+}
+
+.hover\:bg-light:hover {
+    background-color: #a0a0a0 !important;
+}
+
+header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+header .user-info {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+@media (max-width: 768px) {
+    nav {
+        width: 100%;
+        position: relative;
+    }
+
+    nav:hover {
+        width: 100%;
+    }
+
+    main {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    nav {
+        width: 14rem;
+    }
+
+    nav:hover {
+        width: 16rem;
+    }
+
+    main {
+        margin-left: 14rem;
+    }
+
+    nav:hover + main {
+        margin-left: 16rem;
+    }
+}
+
+.logout-button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    text-align: left;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: rgba(255, 0, 0, 0.685);
+    color: white;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.list-group-item {
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f3f4f6; /* Tailwind CSS gray-100 */
+}
+
+/*  */
+
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1; /* Light gray background on hover */
+}
+
+.btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}

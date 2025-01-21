@@ -5,121 +5,186 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Panel')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
-        a {
-            text-decoration: none !important;
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #343a40;
+            color: #fff;
+            transition: width 0.3s ease;
         }
-        nav {
+        .sidebar.collapsed {
+            width: 60px;
+        }
+        .sidebar.collapsed .sidebar-header,
+        .sidebar.collapsed .nav-link-text {
+            display: none;
+        }
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            background-color: #2c3136;
+        }
+        .sidebar-header a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li a {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .sidebar ul li a:hover {
+            background-color: #495057;
+        }
+        .sidebar ul li a i {
+            margin-right: 10px;
+        }
+        .sidebar-toggle {
             position: fixed;
-            top: 0;
-            bottom: 0;
-            overflow-y: auto;
-            background-color: #ffffff;
-            border-right: 1px solid #e5e7eb;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
         }
-        main {
-            margin-left: 16rem; /* Adjust based on the width of the nav */
-            background-color: #f9fafb;
+        .main-content {
+            margin-left: 250px;
+            transition: margin-left 0.3s ease;
         }
-        pre {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: #ffffff;
-            padding: 1rem;
-            border-top: 1px solid #e5e7eb;
-            overflow-x: auto;
+        .main-content.expanded {
+            margin-left: 60px;
         }
     </style>
 </head>
 <body>
-    <div class="flex h-screen bg-gray-100">
-        <!-- Sidebar Navigation -->
-        <nav class="w-64 bg-white border-r border-gray-200">
-            <div class="h-16 flex items-center justify-center border-b border-gray-200">
-                <!-- Logo -->
-                <a href="{{ route('admin.dashboard') }}" class="text-xl font-semibold text-gray-800">
-                    Admin Panel
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <div class="d-flex h-100">
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <!-- Header -->
+            <div class="sidebar-header">
+                <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center justify-content-center">
+                    <i class="bi bi-speedometer2 me-2"></i>
+                    <span class="nav-link-text">Admin Panel</span>
                 </a>
             </div>
-            <ul class="mt-4">
-                <!-- Dashboard Link -->
+
+            <!-- Navigation Links -->
+            <ul class="list-unstyled mt-3">
+                @foreach ([
+                    ['route' => 'admin.dashboard', 'label' => __('Dashboard'), 'icon' => 'bi bi-house'],
+                    ['route' => 'alumni.index', 'label' => __('Alumni'), 'icon' => 'bi bi-people'],
+                    ['route' => 'tahun_lulus.index', 'label' => __('Tahun Lulus'), 'icon' => 'bi bi-calendar'],
+                    ['route' => 'status_alumni.index', 'label'  => __('Status Alumni'), 'icon' => 'bi bi-check2-circle'],
+                    ['route' => 'bidang_keahlian.index', 'label' => __('Bidang Keahlian'), 'icon' => 'bi bi-briefcase'],
+                    ['route' => 'program_keahlian.index', 'label' => __('Program Keahlian'), 'icon' => 'bi bi-journal'],
+                    ['route' => 'konsentrasi_keahlian.index', 'label' => __('Konsentrasi Keahlian'), 'icon' => 'bi bi-layers'],
+                    ['route' => 'tracer_kuliah.index', 'label' => __('Tracer Kuliah'), 'icon' => 'bi bi-building'],
+                    ['route' => 'tracer_kerja.index', 'label' => __('Tracer Kerja'), 'icon' => 'bi bi-briefcase'],
+                    ['route' => 'testimoni.index', 'label' => __('Testimoni'), 'icon' => 'bi bi-chat-left-text'],
+                ] as $item)
                 <li>
-                    <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
-                        {{ __('Dashboard') }}
+                    <a href="{{ route($item['route']) }}" class="d-flex align-items-center px-4 py-3 hover:bg-light">
+                        <i class="{{ $item['icon'] }} me-2"></i>
+                        <span class="nav-link-text">{{ $item['label'] }}</span>
                     </a>
                 </li>
+                @endforeach
 
-                <!-- Alumni Link -->
+                <!-- Submenu -->
                 <li>
-                    <a href="{{ route('alumni.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
-                        {{ __('Alumni') }}
+                    <a href="#keahlianSubmenu" 
+                       class="d-flex align-items-center px-4 py-3 text-decoration-none" 
+                       data-bs-toggle="collapse" 
+                       aria-expanded="false" 
+                       aria-controls="keahlianSubmenu">
+                        <i class="bi bi-book me-2"></i>
+                        <span class="nav-link-text">{{ __('Keahlian') }}</span>
+                        <i class="bi bi-chevron-down ms-auto"></i>
                     </a>
+                    <ul class="collapse list-unstyled ms-3" id="keahlianSubmenu">
+                        @foreach ([
+                            ['route' => 'bidang_keahlian.index', 'label' => __('Bidang Keahlian')],
+                            ['route' => 'program_keahlian.index', 'label' => __('Program Keahlian')],
+                            ['route' => 'konsentrasi_keahlian.index', 'label' => __('Konsentrasi Keahlian')],
+                        ] as $submenu)
+                        <li>
+                            <a href="{{ route($submenu['route']) }}" 
+                               class="d-block px-4 py-2 text-decoration-none hover-bg-light">
+                                <i class="bi bi-dot me-2"></i> {{ $submenu['label'] }}
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
                 </li>
 
-                <!-- Tahun Lulus Link -->
-                <li>
-                    <a href="{{ route('tahun_lulus.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
-                        {{ __('Tahun Lulus') }}
-                    </a>
-                </li>
-
-                <!-- Bidang keahlian Link -->
-                <li>
-                    <a href="{{ route('bidang_keahlian.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
-                        {{ __('Bidang Keahlian') }}
-                    </a>
-                </li>
-
-                <!-- Program keahlian Link -->
-                <li>
-                    <a href="{{ route('program_keahlian.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
-                        {{ __('Program Keahlian') }}
-                    </a>
-                </li>
-                
-
-                <!-- Profile Link -->
-                <li>
-                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
-                        {{ __('Profile') }}
-                    </a>
-                </li>
-
-
-                <!-- Logout Link -->
-                <li>
-                    <form method="POST" action="{{ route('logout') }}">
+                <!-- Logout -->
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('logout') }}" class="mb-0">
                         @csrf
-                        <button type="submit" class="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800">
-                            {{ __('Log Out') }}
+                        <button type="submit" class="w-100 text-start px-4 py-3 logout-button">
+                            <i class="bi bi-box-arrow-right me-2"></i>
+                            <span class="nav-link-text">{{ __('Log Out') }}</span>
                         </button>
                     </form>
                 </li>
             </ul>
         </nav>
 
-        <!-- Main Content Area -->
-        <main class="flex-1 flex flex-col">
-            <!-- Top Navigation -->
-            <header class="bg-white shadow-sm">
-                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                    <h1 class="text-lg font-semibold text-gray-800"></h1>
-                    <div>
+        <!-- Main Content -->
+        <main class="main-content flex-grow-1 d-flex flex-column" id="main-content">
+            <!-- Header -->
+            <header>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>@yield('title')</h1>
+                    <div class="user-info">
                         @auth
-                            <span class="text-gray-600">{{ Auth::user()->name }}</span>
+                            <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->name }}
                         @endauth
                     </div>
                 </div>
             </header>
 
-            <!-- Dynamic Content -->
-            <section class="flex-1 p-4">
-                @yield('content')
-                <!-- Remove the undefined $slot variable -->
-                {{-- {{ $slot }} --}}
+            <!-- Content Section -->
+            <section class="flex-grow-1 p-4">
+                <div class="container">
+                    @yield('content')
+                </div>
             </section>
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        }
+    </script>
 </body>
 </html>

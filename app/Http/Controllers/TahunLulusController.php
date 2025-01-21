@@ -75,11 +75,11 @@ class TahunLulusController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TahunLulus $tahunLulus)
+    public function destroy($id)
     {
+        $tahunLulus = TahunLulus::findOrFail($id);
         $tahunLulus->delete();
 
-        return redirect()->route('tahun_lulus.index')
-                         ->with('success', 'Tahun Lulus deleted successfully.');
+        return redirect()->route('tahun_lulus.index')->with('success', 'Tahun Lulus berhasil dihapus.');
     }
 }
