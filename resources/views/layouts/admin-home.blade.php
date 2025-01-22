@@ -17,6 +17,10 @@
             background-color: #343a40;
             color: #fff;
             transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
         .sidebar.collapsed {
             width: 60px;
@@ -66,21 +70,51 @@
         .main-content {
             margin-left: 250px;
             transition: margin-left 0.3s ease;
+            overflow-y: auto;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
         .main-content.expanded {
             margin-left: 60px;
+        }
+        body {
+            background-color: #f9f9f9;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+                background-color: #343a40;
+                color: #fff;
+                transition: width 0.3s ease;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .main-content {
+                margin-left: 0;
+                transition: margin-left 0.3s ease;
+            }
+        }
+        .sidebar::-webkit-scrollbar {
+            display: none;
+        }
+        .main-content::-webkit-scrollbar {
+            display: none;
         }
     </style>
 </head>
 <body>
     <!-- Sidebar Toggle Button -->
-    <button class="sidebar-toggle" onclick="toggleSidebar()">
+    <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
         <i class="bi bi-list"></i>
     </button>
 
     <div class="d-flex h-100">
         <!-- Sidebar -->
-        <nav class="sidebar" id="sidebar">
+        <nav class="sidebar" id="sidebar" role="navigation">
             <!-- Header -->
             <div class="sidebar-header">
                 <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center justify-content-center">
@@ -104,7 +138,7 @@
                     ['route' => 'testimoni.index', 'label' => __('Testimoni'), 'icon' => 'bi bi-chat-left-text'],
                 ] as $item)
                 <li>
-                    <a href="{{ route($item['route']) }}" class="d-flex align-items-center px-4 py-3 hover:bg-light">
+                    <a href="{{ route($item['route']) }}" class="d-flex align-items-center px-4 py-3 hover:bg-light" title="{{ $item['label'] }}">
                         <i class="{{ $item['icon'] }} me-2"></i>
                         <span class="nav-link-text">{{ $item['label'] }}</span>
                     </a>
@@ -130,7 +164,7 @@
                         ] as $submenu)
                         <li>
                             <a href="{{ route($submenu['route']) }}" 
-                               class="d-block px-4 py-2 text-decoration-none hover-bg-light">
+                               class="d-block px-4 py-2 text-decoration-none hover-bg-light" title="{{ $submenu['label'] }}">
                                 <i class="bi bi-dot me-2"></i> {{ $submenu['label'] }}
                             </a>
                         </li>

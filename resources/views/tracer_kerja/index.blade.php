@@ -13,6 +13,7 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+    <div class="table-responsive">
     <table class="table table-bordered table-hover shadow-sm">
         <thead class="thead-dark">
             <tr>
@@ -58,5 +59,6 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 </div>
 @endsection

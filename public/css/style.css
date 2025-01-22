@@ -197,3 +197,18 @@ header .user-info {
     background-color: #c82333;
     border-color: #bd2130;
 }
+
+.btn-show {
+    background-color: #8BC34A; /* Warna hijau muda */
+    border-color: #8BC34A;
+}
+
+.btn-show:hover {
+    background-color: #3e8e41; /* Warna hijau muda lebih gelap saat hover */
+    border-color: #3e8e41;
+}
+
+.yellow-500 {
+    background-color: #f7dc6f;
+    color: #fff;
+}

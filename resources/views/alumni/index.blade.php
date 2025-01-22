@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between mb-3">
         <h2>Daftar Alumni</h2>
         <a href="{{ route('alumni.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus mr-2"></i> Tambah Alumni
+            <i class="fa fa-plus mr-2"></i>Tambah Alumni
         </a>
     </div>
     @if (session('success'))
@@ -35,14 +35,17 @@
                 <td>{{ $item->no_hp }}</td>
                 <td>{{ $item->email }}</td>
                 <td>
+                    <a href="{{ route('alumni.show', $item->id_alumni) }}" class="btn btn-show btn-sm">
+                        <i class="fa fa-eye"></i>
+                    </a>
                     <a href="{{ route('alumni.edit', $item->id_alumni) }}" class="btn btn-warning btn-sm">
-                        <i class="fa fa-edit"></i> Edit
+                        <i class="fa fa-edit"></i>
                     </a>
                     <form action="{{ route('alumni.destroy', $item->id_alumni) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">
-                            <i class="fa fa-trash"></i> Hapus
+                            <i class="fa fa-trash"></i>
                         </button>
                     </form>
                 </td>
