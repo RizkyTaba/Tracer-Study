@@ -104,6 +104,9 @@
         .main-content::-webkit-scrollbar {
             display: none;
         }
+        .list-unstyled.collapsed{
+            visibility: visible !important;
+        }
     </style>
 </head>
 <body>
@@ -130,9 +133,6 @@
                     ['route' => 'alumni.index', 'label' => __('Alumni'), 'icon' => 'bi bi-people'],
                     ['route' => 'tahun_lulus.index', 'label' => __('Tahun Lulus'), 'icon' => 'bi bi-calendar'],
                     ['route' => 'status_alumni.index', 'label'  => __('Status Alumni'), 'icon' => 'bi bi-check2-circle'],
-                    ['route' => 'bidang_keahlian.index', 'label' => __('Bidang Keahlian'), 'icon' => 'bi bi-briefcase'],
-                    ['route' => 'program_keahlian.index', 'label' => __('Program Keahlian'), 'icon' => 'bi bi-journal'],
-                    ['route' => 'konsentrasi_keahlian.index', 'label' => __('Konsentrasi Keahlian'), 'icon' => 'bi bi-layers'],
                     ['route' => 'tracer_kuliah.index', 'label' => __('Tracer Kuliah'), 'icon' => 'bi bi-building'],
                     ['route' => 'tracer_kerja.index', 'label' => __('Tracer Kerja'), 'icon' => 'bi bi-briefcase'],
                     ['route' => 'testimoni.index', 'label' => __('Testimoni'), 'icon' => 'bi bi-chat-left-text'],
@@ -156,11 +156,11 @@
                         <span class="nav-link-text">{{ __('Keahlian') }}</span>
                         <i class="bi bi-chevron-down ms-auto"></i>
                     </a>
-                    <ul class="collapse list-unstyled ms-3" id="keahlianSubmenu">
+                    <ul style="visibility: visible" class="collapse list-unstyled ms-3" id="keahlianSubmenu">
                         @foreach ([
-                            ['route' => 'bidang_keahlian.index', 'label' => __('Bidang Keahlian')],
-                            ['route' => 'program_keahlian.index', 'label' => __('Program Keahlian')],
-                            ['route' => 'konsentrasi_keahlian.index', 'label' => __('Konsentrasi Keahlian')],
+                            ['route' => 'bidang_keahlian.index', 'label' => __('Bidang Keahlian'), 'icon' => 'bi bi-briefcase'],
+                            ['route' => 'program_keahlian.index', 'label' => __('Program Keahlian'), 'icon' => 'bi bi-journal'],
+                            ['route' => 'konsentrasi_keahlian.index', 'label' => __('Konsentrasi Keahlian'), 'icon' => 'bi bi-layers'],
                         ] as $submenu)
                         <li>
                             <a href="{{ route($submenu['route']) }}" 
@@ -213,12 +213,36 @@
     <script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // Fungsi untuk toggle sidebar
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('main-content');
             sidebar.classList.toggle('collapsed');
             mainContent.classList.toggle('expanded');
+    
+            // Simpan status sidebar di localStorage
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            localStorage.setItem('sidebarCollapsed', isCollapsed);
         }
+    
+        // Fungsi untuk memeriksa status sidebar saat halaman dimuat
+        function checkSidebarState() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    
+            if (isCollapsed) {
+                sidebar.classList.add('collapsed');
+                sidebar.style.visibility ="visible"
+                mainContent.classList.add('expanded');
+            } else {
+                sidebar.classList.remove('collapsed');
+                mainContent.classList.remove('expanded');
+            }
+        }
+    
+        // Panggil fungsi checkSidebarState saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', checkSidebarState);
     </script>
 </body>
 </html>
