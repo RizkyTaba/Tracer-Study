@@ -1,5 +1,7 @@
 @extends('layouts.admin-home')
 
+@section('title', 'Edit Program Keahlian')
+
 @section('content')
     <h1>Edit Program Keahlian</h1>
 

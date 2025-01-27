@@ -1,5 +1,7 @@
 @extends('layouts.admin-home')
 
+@section('title', 'Edit Bidang Keahlian')
+
 @section('content')
 <div class="container mt-4">
     <div class="row">

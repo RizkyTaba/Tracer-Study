@@ -1,5 +1,7 @@
 @extends('layouts.admin-home')
 
+@section('title', 'Edit Konsentrasi Keahlian')
+
 @section('content')
 <div class="container mt-4">
     <h1 class="text-center mb-4">Edit Konsentrasi Keahlian</h1>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\TahunLulus;
 use App\Models\KonsentrasiKeahlian;
 use App\Models\StatusAlumni;
+use App\Models\User;
 
 class AlumniController extends Controller
 {
@@ -26,7 +27,7 @@ class AlumniController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'id_tahun_lulus' => 'required|integer',
             'id_konsentrasi_keahlian' => 'required|integer',
             'id_status_alumni' => 'required|integer',
@@ -45,6 +46,14 @@ class AlumniController extends Controller
             'akun_ig' => 'nullable|max:50',
             'akun_tiktok' => 'nullable|max:50',
             'status_login' => 'required|in:0,1',
+        ]);
+
+        // Buat user baru dengan role 'user'
+        $user = User::create([
+            'name' => $validatedData['nama_depan'] . ' ' . $validatedData['nama_belakang'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'role' => 'user', // Pastikan kolom 'role' ada di tabel users
         ]);
 
         Alumni::create($request->all());
@@ -127,5 +136,7 @@ class AlumniController extends Controller
         $alumni = Alumni::findOrFail($id);
         return view('alumni.show', compact('alumni'));
     }
+
+    // Remove the belongsTo relationship from the controller
     
 }

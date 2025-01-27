@@ -133,6 +133,9 @@
                     ['route' => 'alumni.index', 'label' => __('Alumni'), 'icon' => 'bi bi-people'],
                     ['route' => 'tahun_lulus.index', 'label' => __('Tahun Lulus'), 'icon' => 'bi bi-calendar'],
                     ['route' => 'status_alumni.index', 'label'  => __('Status Alumni'), 'icon' => 'bi bi-check2-circle'],
+                    ['route' => 'bidang_keahlian.index', 'label' => __('Bidang Keahlian'), 'icon' => 'bi bi-briefcase'],
+                    ['route' => 'program_keahlian.index', 'label' => __('Program Keahlian'), 'icon' => 'bi bi-journal'],
+                    ['route' => 'konsentrasi_keahlian.index', 'label' => __('Konsentrasi Keahlian'), 'icon' => 'bi bi-layers'],
                     ['route' => 'tracer_kuliah.index', 'label' => __('Tracer Kuliah'), 'icon' => 'bi bi-building'],
                     ['route' => 'tracer_kerja.index', 'label' => __('Tracer Kerja'), 'icon' => 'bi bi-briefcase'],
                     ['route' => 'testimoni.index', 'label' => __('Testimoni'), 'icon' => 'bi bi-chat-left-text'],
@@ -144,33 +147,6 @@
                     </a>
                 </li>
                 @endforeach
-
-                <!-- Submenu -->
-                <li>
-                    <a href="#keahlianSubmenu" 
-                       class="d-flex align-items-center px-4 py-3 text-decoration-none" 
-                       data-bs-toggle="collapse" 
-                       aria-expanded="false" 
-                       aria-controls="keahlianSubmenu">
-                        <i class="bi bi-book me-2"></i>
-                        <span class="nav-link-text">{{ __('Keahlian') }}</span>
-                        <i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul style="visibility: visible" class="collapse list-unstyled ms-3" id="keahlianSubmenu">
-                        @foreach ([
-                            ['route' => 'bidang_keahlian.index', 'label' => __('Bidang Keahlian'), 'icon' => 'bi bi-briefcase'],
-                            ['route' => 'program_keahlian.index', 'label' => __('Program Keahlian'), 'icon' => 'bi bi-journal'],
-                            ['route' => 'konsentrasi_keahlian.index', 'label' => __('Konsentrasi Keahlian'), 'icon' => 'bi bi-layers'],
-                        ] as $submenu)
-                        <li>
-                            <a href="{{ route($submenu['route']) }}" 
-                               class="d-block px-4 py-2 text-decoration-none hover-bg-light" title="{{ $submenu['label'] }}">
-                                <i class="bi bi-dot me-2"></i> {{ $submenu['label'] }}
-                            </a>
-                        </li>
-                        @endforeach
-                    </ul>
-                </li>
 
                 <!-- Logout -->
                 <li class="nav-item">

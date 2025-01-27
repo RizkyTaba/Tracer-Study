@@ -31,4 +31,18 @@ class Alumni extends Model
         'password',
         'status_login',
     ];
+
+    public function tahunLulus()
+    {
+        return $this->belongsTo(TahunLulus::class, 'id_tahun_lulus');
+    }
+    public function konsentrasiKeahlian()
+    {
+        return $this->belongsTo(KonsentrasiKeahlian::class, 'id_konsentrasi_keahlian');
+    }
+
+    public function statusAlumni()
+    {
+        return $this->belongsTo(StatusAlumni::class, 'id_status_alumni');
+    }
 }

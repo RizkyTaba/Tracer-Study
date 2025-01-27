@@ -1,5 +1,7 @@
 @extends('layouts.admin-home')
 
+@section('title', 'Create Status Alumni')
+
 @section('content')
 <div class="container">
     <h1>Tambah Status Alumni</h1>

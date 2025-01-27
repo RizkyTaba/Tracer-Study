@@ -1,5 +1,7 @@
 @extends('layouts.admin-home')
 
+@section('title', 'Daftar Testimoni')
+
 @section('content')
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">

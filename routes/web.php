@@ -12,19 +12,26 @@ use App\Http\Controllers\TracerKerjaController;
 use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProgramKeahlianController;
+use App\Http\Controllers\UserController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('user.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'role:user'])->group(function(){
+    Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+    Route::post('/user/logout', [UserController::class, 'logout'])->name('user.logout');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function(){

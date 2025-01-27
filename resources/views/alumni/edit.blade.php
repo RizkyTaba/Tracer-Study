@@ -1,5 +1,7 @@
 @extends('layouts.admin-home')
 
+@section('title', 'Edit Alumni')
+
 @section('content')
 <div class="container mt-4">
     <h2 class="mb-4">Edit Alumni</h2>
