@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'User Panel')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -16,6 +17,9 @@
         nav {
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         nav a, nav button {
             transition: color 0.3s ease, background-color 0.3s ease;
@@ -95,8 +99,9 @@
 
             <!-- Navigation Links -->
             <div class="nav-links hidden md:flex space-x-6">
-                <a href="{{ route('dashboard') }}">Dashboard</a>
-                <a href="{{ route('profile.edit') }}">Profile</a>
+                <a href="{{ route('user.dashboard') }}">Dashboard</a>
+                <a href="{{ route('user.Pekerjaan') }}">Tracer Kerja</a>
+                <a href="{{ route('user.Kuliah') }}">Tracer Kuliah</a>
                 @auth
                     <span class="text-gray-700">{{ Auth::user()->name }}</span>
                     <form method="POST" action="{{ route('logout') }}">
@@ -141,5 +146,8 @@
             menu.classList.toggle('hidden');
         });
     </script>
+
+
+@yield('script')
 </body>
 </html>

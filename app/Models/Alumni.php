@@ -45,4 +45,9 @@ class Alumni extends Model
     {
         return $this->belongsTo(StatusAlumni::class, 'id_status_alumni');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_alumni', 'id');
+    }
 }

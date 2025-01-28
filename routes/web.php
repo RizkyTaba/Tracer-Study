@@ -32,6 +32,15 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:user'])->group(function(){
     Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
     Route::post('/user/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::get('/user/Pekerjaan', [UserController::class, 'pekerjaan'])->name('user.Pekerjaan');
+    Route::post('/user/pekerjaan/store', [UserController::class, 'storePekerjaan'])->name('user.pekerjaan.store');
+    Route::put('/user/pekerjaan/update/{id}', [UserController::class, 'updatePekerjaan'])->name('user.pekerjaan.update');
+    Route::get('/user/Kuliah', [UserController::class, 'kuliah'])->name('user.Kuliah');
+    Route::post('/user/kuliah/store', [UserController::class, 'storeKuliah'])->name('user.kuliah.store');
+    Route::put('/user/kuliah/update/{id}', [UserController::class, 'updateKuliah'])->name('user.kuliah.update');
+    Route::post('/user/testimoni/store', [UserController::class, 'storeTestimoni'])->name('user.testimoni.store');
+    Route::put('/user/testimoni/update/{id}', [UserController::class, 'updateTestimoni'])->name('user.testimoni.update');
+    Route::delete('/user/testimoni/delete/{id}', [UserController::class, 'deleteTestimoni'])->name('user.testimoni.delete');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function(){
@@ -39,14 +48,14 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     // // Alumni
-    Route::get('/admin/alumni', [AlumniController::class, 'index'])->name('alumni.index');
-    Route::get('/admin/alumni/create', [AlumniController::class, 'create'])->name('alumni.create');
-    Route::post('/admin/alumni', [AlumniController::class, 'store'])->name('alumni.store');
-    Route::get('/admin/alumni/{alumni}/edit', [AlumniController::class, 'edit'])->name('alumni.edit');
-    Route::put('admin/alumni/{alumni}', [AlumniController::class, 'update'])->name('alumni.update');
-    Route::delete('admin/alumni/{alumni}', [AlumniController::class, 'destroy'])->name('alumni.destroy');
-    Route::get('<admin>alumni/{id}', [AlumniController::class, 'show'])->name('alumni.show');
-    Route::resource('alumni', AlumniController::class);
+    Route::get('/admin/alumni', [AlumniController::class, 'index'])->name('admin.alumni.index');
+    Route::get('/admin/alumni/create', [AlumniController::class, 'create'])->name('admin.alumni.create');
+    Route::post('/admin/alumni', [AlumniController::class, 'store'])->name('admin.alumni.store');
+    Route::get('/admin/alumni/{alumni}/edit', [AlumniController::class, 'edit'])->name('admin.alumni.edit');
+    Route::put('admin/alumni/{alumni}', [AlumniController::class, 'update'])->name('admin.alumni.update');
+    Route::delete('admin/alumni/{alumni}', [AlumniController::class, 'destroy'])->name('admin.alumni.destroy');
+    Route::get('admin/alumni/{id}', [AlumniController::class, 'show'])->name('admin.alumni.show');
+    Route::resource('admin/alumni', AlumniController::class);
     // ----------------
 
     // Tahun Lulus

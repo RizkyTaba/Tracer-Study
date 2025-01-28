@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\TracerKerja;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Alumni;
+use App\Models\TracerKuliah;
+use App\Models\Testimoni;
 
 class UserController extends Controller
 {
@@ -41,7 +46,8 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('user.pekerjaan.index')
+            ->with('success', 'Data pekerjaan berhasil disimpan');
     }
 
     /**
@@ -77,7 +83,8 @@ class UserController extends Controller
             'password' => $request->password ? bcrypt($request->password) : $user->password,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('user.pekerjaan.index')
+            ->with('success', 'Data pekerjaan berhasil diperbarui');
     }
 
     /**
@@ -87,5 +94,264 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+    }
+
+    public function storePekerjaan(Request $request)
+    {
+        $validated = $request->validate([
+            'tracer_kuliah_kampus' => 'required',
+            'tracer_kuliah_status' => 'required',
+            'tracer_kuliah_jenjang' => 'required',
+            'tracer_kuliah_jurusan' => 'required',
+            'tracer_kuliah_linier' => 'required',
+            'tracer_kuliah_alamat' => 'required',
+        ]);
+
+        try {
+            $alumni = Alumni::where('email', Auth::user()->email)->first();
+            $data = [
+                'id_alumni' => $alumni->id_alumni,
+                'tracer_kuliah_kampus' => $request->tracer_kuliah_kampus,
+                'tracer_kuliah_status' => $request->tracer_kuliah_status,
+                'tracer_kuliah_jenjang' => $request->tracer_kuliah_jenjang,
+                'tracer_kuliah_jurusan' => $request->tracer_kuliah_jurusan,
+                'tracer_kuliah_linier' => $request->tracer_kuliah_linier,
+                'tracer_kuliah_alamat' => $request->tracer_kuliah_alamat,
+            ];
+
+            $tracer = TracerKuliah::create($data);
+
+            return redirect()->back()->with('success', 'Data kuliah berhasil disimpan');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    public function pekerjaan()
+    {
+        // Get existing tracer data for the current user
+        $alumni = Alumni::where('email', Auth::user()->email)->first();
+        $tracer = null;
+        
+        if ($alumni) {
+            $tracer = TracerKerja::where('id_alumni', $alumni->id_alumni)->first();
+        }
+        
+        return view('user.Pekerjaan', compact('tracer'));
+    }
+
+    public function dashboard()
+    {
+        // Get the authenticated user
+        $user = Auth::user();
+        
+        // Get user's tracer data if exists
+        $tracer = TracerKerja::where('id_alumni', $user->id)->first();
+        
+        // Get user's testimoni if exists
+        $alumni = Alumni::where('email', Auth::user()->email)->first();
+        $testimoni = null;
+        
+        if ($alumni) {
+            $testimoni = Testimoni::where('id_alumni', $alumni->id_alumni)->first();
+        }
+        
+        return view('user.dashboard', compact('user', 'tracer', 'testimoni'));
+    }
+
+    public function kuliah()
+    {
+        // Get existing tracer data for the current user
+        $alumni = Alumni::where('email', Auth::user()->email)->first();
+        $tracer = null;
+        
+        if ($alumni) {
+            $tracer = TracerKuliah::where('id_alumni', $alumni->id_alumni)->first();
+        }
+        
+        return view('user.Kuliah', compact('tracer'));
+    }
+
+    public function storeKuliah(Request $request)
+    {
+        $validated = $request->validate([
+            'tracer_kuliah_kampus' => 'required',
+            'tracer_kuliah_status' => 'required',
+            'tracer_kuliah_jenjang' => 'required',
+            'tracer_kuliah_jurusan' => 'required',
+            'tracer_kuliah_linier' => 'required',
+            'tracer_kuliah_alamat' => 'required',
+        ]);
+
+        try {
+            $alumni = Alumni::where('email', Auth::user()->email)->first();
+            $data = [
+                'id_alumni' => $alumni->id_alumni,
+                'tracer_kuliah_kampus' => $request->tracer_kuliah_kampus,
+                'tracer_kuliah_status' => $request->tracer_kuliah_status,
+                'tracer_kuliah_jenjang' => $request->tracer_kuliah_jenjang,
+                'tracer_kuliah_jurusan' => $request->tracer_kuliah_jurusan,
+                'tracer_kuliah_linier' => $request->tracer_kuliah_linier,
+                'tracer_kuliah_alamat' => $request->tracer_kuliah_alamat,
+            ];
+
+            $tracer = TracerKuliah::create($data);
+
+            return redirect()->back()->with('success', 'Data kuliah berhasil disimpan');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    public function updatePekerjaan(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'tracer_kerja_pekerjaan' => 'required',
+            'tracer_kerja_nama' => 'required',
+            'tracer_kerja_jabatan' => 'required',
+            'tracer_kerja_status' => 'required',
+            'tracer_kerja_lokasi' => 'required',
+            'tracer_kerja_gaji' => 'required|numeric',
+        ]);
+
+        try {
+            $tracer = TracerKerja::findOrFail($id);
+            
+            // Verify ownership
+            $alumni = Alumni::where('email', Auth::user()->email)->first();
+            if ($tracer->id_alumni !== $alumni->id_alumni) {
+                return redirect()->back()->with('error', 'Unauthorized access');
+            }
+
+            $tracer->update([
+                'tracer_kerja_pekerjaan' => $request->tracer_kerja_pekerjaan,
+                'tracer_kerja_nama' => $request->tracer_kerja_nama,
+                'tracer_kerja_jabatan' => $request->tracer_kerja_jabatan,
+                'tracer_kerja_status' => $request->tracer_kerja_status,
+                'tracer_kerja_lokasi' => $request->tracer_kerja_lokasi,
+                'tracer_kerja_alamat' => $request->tracer_kerja_alamat,
+                'tracer_kerja_tgl_mulai' => $request->tracer_kerja_tgl_mulai,
+                'tracer_kerja_gaji' => $request->tracer_kerja_gaji
+            ]);
+
+            return redirect()->back()->with('success', 'Data pekerjaan berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    public function updateKuliah(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'tracer_kuliah_kampus' => 'required',
+            'tracer_kuliah_jurusan' => 'required',
+            'tracer_kuliah_jenjang' => 'required',
+            'tracer_kuliah_status' => 'required',
+            'tracer_kuliah_linier' => 'required',
+            'tracer_kuliah_alamat' => 'required',
+        ]);
+
+        try {
+            $tracer = TracerKuliah::findOrFail($id);
+            
+            // Verify ownership
+            $alumni = Alumni::where('email', Auth::user()->email)->first();
+            if ($tracer->id_alumni !== $alumni->id_alumni) {
+                return redirect()->back()->with('error', 'Unauthorized access');
+            }
+    
+            $tracer->update([
+                'tracer_kuliah_kampus' => $request->tracer_kuliah_kampus,
+                'tracer_kuliah_jurusan' => $request->tracer_kuliah_jurusan,
+                'tracer_kuliah_jenjang' => $request->tracer_kuliah_jenjang,
+                'tracer_kuliah_status' => $request->tracer_kuliah_status,
+                'tracer_kuliah_linier' => $request->tracer_kuliah_linier,
+                'tracer_kuliah_alamat' => $request->tracer_kuliah_alamat,
+            ]);
+    
+            return redirect()->back()->with('success', 'Data kuliah berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    public function storeTestimoni(Request $request)
+    {
+        $validated = $request->validate([
+            'testimoni' => 'required|string',
+        ]);
+
+        try {
+            $alumni = Alumni::where('email', Auth::user()->email)->first();
+            $data = [
+                'id_alumni' => $alumni->id_alumni,
+                'testimoni' => $request->testimoni,
+                'tgl_testimoni' => now(),
+            ];
+
+            $testimoni = Testimoni::create($data);
+
+            return redirect()->back()->with('success', 'Testimoni berhasil disimpan');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    public function updateTestimoni(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'testimoni' => 'required|string',
+        ]);
+
+        try {
+            $testimoni = Testimoni::findOrFail($id);
+            
+            // Verify ownership
+            $alumni = Alumni::where('email', Auth::user()->email)->first();
+            if ($testimoni->id_alumni !== $alumni->id_alumni) {
+                return redirect()->back()->with('error', 'Unauthorized access');
+            }
+
+            $testimoni->update([
+                'testimoni' => $request->testimoni,
+                'tgl_testimoni' => now(),
+            ]);
+
+            return redirect()->back()->with('success', 'Testimoni berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    public function deleteTestimoni($id)
+    {
+        try {
+            $testimoni = Testimoni::findOrFail($id);
+            
+            // Verify ownership
+            $alumni = Alumni::where('email', Auth::user()->email)->first();
+            if ($testimoni->id_alumni !== $alumni->id_alumni) {
+                return redirect()->back()->with('error', 'Unauthorized access');
+            }
+
+            $testimoni->delete();
+
+            return redirect()->back()->with('success', 'Testimoni berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error: ' . $e->getMessage());
+        }
     }
 }
