@@ -5,26 +5,18 @@
 @section('header', 'Welcome to the Dashboard')
 
 @section('content')
-    <div class="flex flex-col md:flex-row items-center ">
-        <div class="md:w-1/2 flex flex-col justify-center p-6">
-            <h2 class="text-2xl font-bold">Selamat datang di Tracer Study</h2>
-            <p class="mt-4 text-gray-600">Melacak perjalanan karier lulusan setelah menyelesaikan pendidikan.</p>
+    <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 flex flex-col justify-center p-6 transform transition-all duration-500 hover:scale-105">
+            <h2 class="text-2xl font-bold animate-fade-in">Selamat datang di Tracer Study</h2>
+            <p class="mt-4 text-gray-600 animate-slide-in">Melacak perjalanan karier lulusan setelah menyelesaikan pendidikan.</p>
         </div>
-        <div class="md:w-1/2 mt-6 md:mt-0 md:ml-6 flex justify-center p-6">
-            <img src="{{ asset('images/Student.jpg') }}" alt="Dashboard Image">
-        </div>
-    </div>
-    <div class="flex flex-col md:flex-row items-center py-10">
-        <div class="md:w-1/2 mt-6 md:mt-0 md:ml-6 flex justify-center p-6">
-            <img src="{{ asset('images/Bingung.jpg') }}" alt="Dashboard Image">
-        </div>
-        <div class="ml-8 md:w-1/2 flex flex-col justify-center p-6">
-            <h1 class="text-2xl font-bold">Apa Itu Tracer Study?</h1>
+        <div class="md:w-1/2 mt-6 md:mt-0 md:ml-6 flex justify-center p-6 transform transition-all duration-500 hover:scale-105">
+            <img src="{{ asset('images/Student.jpg') }}" alt="Dashboard Image" class="animate-fade-in">
         </div>
     </div>
 
     <!-- Formulir Testimoni Alumni -->
-    <div class="bg-white p-6 mt-8 rounded-md shadow-md">
+    <div class="bg-white p-6 mt-8 rounded-md shadow-md transform transition-all duration-500 hover:shadow-lg animate-slide-up">
         <div class="form-header">
             <h4 class="text-xl font-semibold">{{ isset($testimoni) ? 'Edit' : 'Tambah' }} Testimoni Kamu:</h4>
         </div>
@@ -36,22 +28,29 @@
             @endif
             
             <div class="form-group">
-                <textarea name="testimoni" class="w-full mt-4 p-3 border rounded-md" rows="4" 
-                    placeholder="Berikan testimoni Anda" required>{{ old('testimoni', $testimoni->testimoni ?? '') }}</textarea>
+                <textarea 
+                    name="testimoni" 
+                    class="w-full mt-4 p-3 border rounded-md @error('testimoni') border-red-500 @enderror" 
+                    rows="4" 
+                    placeholder="Berikan testimoni Anda" 
+                    required
+                >{{ old('testimoni', isset($testimoni) ? $testimoni->testimoni : '') }}</textarea>
+
+                @error('testimoni')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="flex justify-between items-center mt-4">
                 <div>
                     @if(isset($testimoni))
-                        <!-- Hapus Button -->
-                        <button type="button" id="deleteBtn" class="bg-red-500 text-white py-2 px-6 rounded-md">
+                        <button type="button" id="deleteBtn" class="bg-red-500 text-white py-2 px-6 rounded-md hover:bg-red-600">
                             <i class="fa fa-trash"></i> Hapus Testimoni
                         </button>
                     @endif
                 </div>
 
-                <!-- Simpan / Update Button -->
-                <button type="submit" id="saveBtn" class="bg-blue-500 text-white py-2 px-6 rounded-md">
+                <button type="submit" id="saveBtn" class="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600">
                     <i class="fa fa-save"></i>
                     {{ isset($testimoni) ? 'Update' : 'Simpan' }} Testimoni
                 </button>
@@ -96,5 +95,46 @@
             }
         });
     </script>
+
+<style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .animate-slide-in {
+            animation: slideIn 1s ease-out;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 1s ease-out;
+        }
+    </style>
 @endsection
 
