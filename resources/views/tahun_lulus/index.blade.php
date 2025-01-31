@@ -22,7 +22,7 @@
                         <td>{{ $tahun->tahun_lulus }}</td>
                         <td>{{ $tahun->keterangan }}</td>
                         <td>
-                            <a href="{{ route('tahun_lulus.edit', $tahun->id_tahun_lulus) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('tahun_lulus.edit', $tahun->id_tahun_lulus) }}" class="btn btn-warning">Ubah</a>
                             <form action="{{ route('tahun_lulus.destroy', $tahun->id_tahun_lulus) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

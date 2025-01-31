@@ -1,10 +1,10 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Edit Konsentrasi Keahlian')
+@section('title', 'Ubah Konsentrasi Keahlian')
 
 @section('content')
 <div class="container mt-4">
-    <h1 class="text-center mb-4">Edit Konsentrasi Keahlian</h1>
+    <h1 class="text-center mb-4">Ubah Konsentrasi Keahlian</h1>
     <form action="{{ route('konsentrasi_keahlian.update', $konsentrasiKeahlian->id_konsentrasi_keahlian) }}" method="POST">
         @csrf
         @method('PUT')

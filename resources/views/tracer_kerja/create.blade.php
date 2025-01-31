@@ -1,6 +1,6 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Create Tracer Kerja')
+@section('title', 'Tambah Tracer Kerja')
 
 @section('content')
 <div class="container mt-4">

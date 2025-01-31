@@ -32,7 +32,7 @@
                 <td>{{ $item->tgl_testimoni }}</td>
                 <td>
                     <a href="{{ route('testimoni.edit', $item->id_testimoni) }}" class="btn btn-warning btn-sm">
-                        <i class="fa fa-edit"></i> Edit
+                        <i class="fa fa-edit"></i> Ubah
                     </a>
                     <form action="{{ route('testimoni.destroy', $item->id_testimoni) }}" method="POST" style="display:inline-block;">
                         @csrf

@@ -35,12 +35,14 @@ Route::middleware(['auth', 'role:user'])->group(function(){
     Route::get('/user/Pekerjaan', [UserController::class, 'pekerjaan'])->name('user.Pekerjaan');
     Route::post('/user/pekerjaan/store', [UserController::class, 'storePekerjaan'])->name('user.pekerjaan.store');
     Route::put('/user/pekerjaan/update/{id}', [UserController::class, 'updatePekerjaan'])->name('user.pekerjaan.update');
+    Route::delete('/user/pekerjaan/{id}', [UserController::class, 'destroyPekerjaan'])->name('user.pekerjaan.destroy');
     Route::get('/user/Kuliah', [UserController::class, 'kuliah'])->name('user.Kuliah');
     Route::post('/user/kuliah/store', [UserController::class, 'storeKuliah'])->name('user.kuliah.store');
     Route::put('/user/kuliah/update/{id}', [UserController::class, 'updateKuliah'])->name('user.kuliah.update');
     Route::post('/user/testimoni/store', [UserController::class, 'storeTestimoni'])->name('user.testimoni.store');
     Route::put('/user/testimoni/update/{id}', [UserController::class, 'updateTestimoni'])->name('user.testimoni.update');
     Route::delete('/user/testimoni/delete/{id}', [UserController::class, 'deleteTestimoni'])->name('user.testimoni.delete');
+    Route::get('/user/profil', [UserController::class, 'profil'])->name('user.profil');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function(){

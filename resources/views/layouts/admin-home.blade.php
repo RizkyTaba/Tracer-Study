@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Panel')</title>
+    <title>@yield('title', 'Dasbor Administrator')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -78,7 +78,7 @@
             margin-left: 60px;
         }
         body {
-            background-color: #f9f9f9;
+            background-color: #f8f9fa;
         }
         @media (max-width: 768px) {
             .sidebar {
@@ -110,35 +110,35 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar Toggle Button -->
-    <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+    <!-- Tombol Pengatur Bilah Samping -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Atur Bilah Samping">
         <i class="bi bi-list"></i>
     </button>
 
     <div class="d-flex h-100">
-        <!-- Sidebar -->
+        <!-- Bilah Samping -->
         <nav class="sidebar" id="sidebar" role="navigation">
-            <!-- Header -->
+            <!-- Bagian Atas -->
             <div class="sidebar-header">
                 <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center justify-content-center">
                     <i class="bi bi-speedometer2 me-2"></i>
-                    <span class="nav-link-text">Admin Panel</span>
+                    <span class="nav-link-text">Administrator</span>
                 </a>
             </div>
 
-            <!-- Navigation Links -->
+            <!-- Menu Navigasi -->
             <ul class="list-unstyled mt-3">
                 @foreach ([
-                    ['route' => 'admin.dashboard', 'label' => __('Dashboard'), 'icon' => 'bi bi-house'],
-                    ['route' => 'alumni.index', 'label' => __('Alumni'), 'icon' => 'bi bi-people'],
-                    ['route' => 'tahun_lulus.index', 'label' => __('Tahun Lulus'), 'icon' => 'bi bi-calendar'],
+                    ['route' => 'admin.dashboard', 'label' => __('Beranda'), 'icon' => 'bi bi-house'],
+                    ['route' => 'alumni.index', 'label' => __('Data Alumni'), 'icon' => 'bi bi-people'],
+                    ['route' => 'tahun_lulus.index', 'label' => __('Tahun Kelulusan'), 'icon' => 'bi bi-calendar'],
                     ['route' => 'status_alumni.index', 'label'  => __('Status Alumni'), 'icon' => 'bi bi-check2-circle'],
                     ['route' => 'bidang_keahlian.index', 'label' => __('Bidang Keahlian'), 'icon' => 'bi bi-briefcase'],
                     ['route' => 'program_keahlian.index', 'label' => __('Program Keahlian'), 'icon' => 'bi bi-journal'],
                     ['route' => 'konsentrasi_keahlian.index', 'label' => __('Konsentrasi Keahlian'), 'icon' => 'bi bi-layers'],
                     ['route' => 'tracer_kuliah.index', 'label' => __('Tracer Kuliah'), 'icon' => 'bi bi-building'],
                     ['route' => 'tracer_kerja.index', 'label' => __('Tracer Kerja'), 'icon' => 'bi bi-briefcase'],
-                    ['route' => 'testimoni.index', 'label' => __('Testimoni'), 'icon' => 'bi bi-chat-left-text'],
+                    ['route' => 'testimoni.index', 'label' => __('Testimoni Alumni'), 'icon' => 'bi bi-chat-left-text'],
                 ] as $item)
                 <li>
                     <a href="{{ route($item['route']) }}" class="d-flex align-items-center px-4 py-3 hover:bg-light" title="{{ $item['label'] }}">
@@ -148,22 +148,22 @@
                 </li>
                 @endforeach
 
-                <!-- Logout -->
+                <!-- Tombol Keluar -->
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}" class="mb-0">
                         @csrf
                         <button type="submit" class="w-100 text-start px-4 py-3 logout-button">
                             <i class="bi bi-box-arrow-right me-2"></i>
-                            <span class="nav-link-text">{{ __('Log Out') }}</span>
+                            <span class="nav-link-text">{{ __('Keluar Sistem') }}</span>
                         </button>
                     </form>
                 </li>
             </ul>
         </nav>
 
-        <!-- Main Content -->
+        <!-- Konten Utama -->
         <main class="main-content flex-grow-1 d-flex flex-column" id="main-content">
-            <!-- Header -->
+            <!-- Bagian Atas -->
             <header>
                 <div class="d-flex justify-content-between align-items-center">
                     <h1>@yield('title')</h1>
@@ -175,7 +175,7 @@
                 </div>
             </header>
 
-            <!-- Content Section -->
+            <!-- Area Konten -->
             <section class="flex-grow-1 p-4">
                 <div class="container">
                     @yield('content')

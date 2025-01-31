@@ -1,9 +1,9 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Edit Program Keahlian')
+@section('title', 'Ubah Program Keahlian')
 
 @section('content')
-    <h1>Edit Program Keahlian</h1>
+    <h1>Ubah Program Keahlian</h1>
 
     <form action="{{ route('program_keahlian.update', $programKeahlian->id_program_keahlian) }}" method="POST">
         @csrf
@@ -44,6 +44,6 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Perbarui</button>
     </form>
 @endsection

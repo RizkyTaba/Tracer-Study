@@ -13,7 +13,7 @@
             <div class="col-md-6">
                 <div class="card mt-5">
                     <div class="card-header text-center">
-                        <h4>Login</h4>
+                        <h4>Masuk</h4>
                     </div>
                     <div class="card-body">
                         @if ($errors->any())
@@ -32,13 +32,13 @@
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
+                                <label for="password">Kata Sandi</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
-                            <div class="text-center mt-3">
-                                <a href="{{ route('register') }}">Don't Have an Account?</a>
-                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+                            {{-- <div class="text-center mt-3">
+                                <a href="{{ route('register') }}">Belum Punya Akun?</a>
+                            </div> --}}
                         </form>
                     </div>
                 </div>

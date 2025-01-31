@@ -1,6 +1,6 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Create Tahun Lulus')
+@section('title', 'Tambah Tahun Lulus')
 
 @section('content')
 <div class="container mt-4">

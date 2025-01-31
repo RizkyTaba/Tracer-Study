@@ -1,11 +1,11 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Edit Status Alumni')
+@section('title', 'Ubah Status Alumni')
 
 
 @section('content')
 <div class="container">
-    <h1>Edit Status Alumni</h1>
+    <h1>Ubah Status Alumni</h1>
     <form action="{{ route('status_alumni.update', $statusAlumni->id_status_alumni) }}" method="POST">
         @csrf
         @method('PUT')

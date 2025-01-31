@@ -1,6 +1,6 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Create Status Alumni')
+@section('title', 'Tambah Status Alumni')
 
 @section('content')
 <div class="container">

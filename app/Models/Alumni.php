@@ -50,4 +50,14 @@ class Alumni extends Model
     {
         return $this->belongsTo(User::class, 'id_alumni', 'id');
     }
+
+    public function tracerKerja()
+    {
+        return $this->hasMany(TracerKerja::class, 'id_alumni', 'id_alumni');
+    }
+
+    public function tracerKuliah()
+    {
+        return $this->hasMany(TracerKuliah::class, 'id_alumni', 'id_alumni');
+    }
 }

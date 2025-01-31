@@ -1,12 +1,12 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Edit Bidang Keahlian')
+@section('title', 'Ubah Bidang Keahlian')
 
 @section('content')
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
-            <h1 class="text-center mb-4">Edit Bidang Keahlian</h1>
+            <h1 class="text-center mb-4">Ubah Bidang Keahlian</h1>
             <div class="card shadow">
                 <div class="card-body">
                     <form action="{{ route('bidang_keahlian.update', $bidangKeahlian->id_bidang_keahlian) }}" method="POST">

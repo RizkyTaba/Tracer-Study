@@ -25,7 +25,7 @@
                             <td>{{ $programKeahlian->program_keahlian }}</td>
                             <td>{{ $programKeahlian->bidangKeahlian->bidang_keahlian}}</td>
                             <td>
-                                <a href="{{ route('program_keahlian.edit', ['program_keahlian' => $programKeahlian->id_program_keahlian]) }}" class="btn btn-warning">Edit</a>
+                                <a href="{{ route('program_keahlian.edit', ['program_keahlian' => $programKeahlian->id_program_keahlian]) }}" class="btn btn-warning">Ubah</a>
                                 <form action="{{ route('program_keahlian.destroy', $programKeahlian->id_program_keahlian) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

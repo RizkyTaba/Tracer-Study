@@ -133,7 +133,7 @@ class AlumniController extends Controller
 
     public function show($id)
     {
-        $alumni = Alumni::findOrFail($id);
+        $alumni = Alumni::with(['tracerKerja', 'tracerKuliah'])->find($id);
         return view('alumni.show', compact('alumni'));
     }
 

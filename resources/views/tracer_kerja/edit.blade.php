@@ -1,10 +1,10 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Edit Tracer Kerja')
+@section('title', 'Ubah Tracer Kerja')
 
 @section('content')
 <div class="container mt-4">
-    <h2>Edit Tracer Kerja</h2>
+    <h2>Ubah Tracer Kerja</h2>
     <form action="{{ route('tracer_kerja.update', $tracerKerja->id_tracer_kerja) }}" method="POST">
         @csrf
         @method('PUT')
@@ -48,7 +48,7 @@
             <label for="tracer_kerja_gaji" class="form-label">Gaji</label>
             <input type="text" class="form-control" id="tracer_kerja_gaji" name="tracer_kerja_gaji" value="{{ $tracerKerja->tracer_kerja_gaji }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        <button type="submit" class="btn btn-primary">Perbarui</button>
         <a href="{{ route('tracer_kerja.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>

@@ -99,29 +99,33 @@ class UserController extends Controller
     public function storePekerjaan(Request $request)
     {
         $validated = $request->validate([
-            'tracer_kuliah_kampus' => 'required',
-            'tracer_kuliah_status' => 'required',
-            'tracer_kuliah_jenjang' => 'required',
-            'tracer_kuliah_jurusan' => 'required',
-            'tracer_kuliah_linier' => 'required',
-            'tracer_kuliah_alamat' => 'required',
+            'tracer_kerja_pekerjaan' => 'required',
+            'tracer_kerja_nama' => 'required',
+            'tracer_kerja_jabatan' => 'required',
+            'tracer_kerja_status' => 'required',
+            'tracer_kerja_lokasi' => 'required',
+            'tracer_kerja_gaji' => 'required|numeric',
+            'tracer_kerja_alamat' => 'required',
+            'tracer_kerja_tgl_mulai' => 'required|date',
         ]);
 
         try {
             $alumni = Alumni::where('email', Auth::user()->email)->first();
             $data = [
                 'id_alumni' => $alumni->id_alumni,
-                'tracer_kuliah_kampus' => $request->tracer_kuliah_kampus,
-                'tracer_kuliah_status' => $request->tracer_kuliah_status,
-                'tracer_kuliah_jenjang' => $request->tracer_kuliah_jenjang,
-                'tracer_kuliah_jurusan' => $request->tracer_kuliah_jurusan,
-                'tracer_kuliah_linier' => $request->tracer_kuliah_linier,
-                'tracer_kuliah_alamat' => $request->tracer_kuliah_alamat,
+                'tracer_kerja_pekerjaan' => $request->tracer_kerja_pekerjaan,
+                'tracer_kerja_nama' => $request->tracer_kerja_nama,
+                'tracer_kerja_jabatan' => $request->tracer_kerja_jabatan,
+                'tracer_kerja_status' => $request->tracer_kerja_status,
+                'tracer_kerja_lokasi' => $request->tracer_kerja_lokasi,
+                'tracer_kerja_gaji' => $request->tracer_kerja_gaji,
+                'tracer_kerja_alamat' => $request->tracer_kerja_alamat,
+                'tracer_kerja_tgl_mulai' => $request->tracer_kerja_tgl_mulai,
             ];
 
-            $tracer = TracerKuliah::create($data);
+            $tracer = TracerKerja::create($data);
 
-            return redirect()->back()->with('success', 'Data kuliah berhasil disimpan');
+            return redirect()->back()->with('success', 'Data pekerjaan berhasil disimpan');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Error: ' . $e->getMessage())
@@ -352,6 +356,39 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+    public function profil()
+    {
+        // Mengambil data user yang sedang login beserta relasinya
+        $alumni = Alumni::where('email', Auth::user()->email)->with([
+            'tracerKerja',
+            'tracerKuliah', 
+            'tahunLulus',
+            'konsentrasiKeahlian',
+            'statusAlumni'
+        ])->first();
+
+        // Jika alumni tidak ditemukan
+        if (!$alumni) {
+            return redirect()->back()->with('error', 'Data alumni tidak ditemukan');
+        }
+
+        return view('user.profil', compact('alumni'));
+    }
+
+    public function destroyPekerjaan($id)
+    {
+        try {
+            $tracer = TracerKerja::findOrFail($id);
+            $tracer->delete();
+            
+            return redirect()->route('user.pekerjaan.index')
+                ->with('success', 'Data pekerjaan berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Gagal menghapus data pekerjaan');
         }
     }
 }

@@ -1,9 +1,9 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Create Program Keahlian')
+@section('title', 'Tambah Program Keahlian')
 
 @section('content')
-    <h1>Create Program Keahlian</h1>
+    <h1>Tambah Program Keahlian</h1>
 
     <form action="{{ route('program_keahlian.store') }}" method="POST">
         @csrf
@@ -43,6 +43,6 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 @endsection

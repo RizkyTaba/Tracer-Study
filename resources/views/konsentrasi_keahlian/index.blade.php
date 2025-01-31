@@ -27,7 +27,7 @@
                             <td class="py-2 px-4 border-b">{{ $item->kode_konsentrasi_keahlian}}</td>
                             <td class="py-2 px-4 border-b">{{ $item->konsentrasi_keahlian }}</td>
                             <td class="py-2 px-4 border-b">
-                                <a href="{{ route('konsentrasi_keahlian.edit', $item->id_konsentrasi_keahlian) }}" class="btn btn-warning">Edit</a>
+                                <a href="{{ route('konsentrasi_keahlian.edit', $item->id_konsentrasi_keahlian) }}" class="btn btn-warning">Ubah</a>
                                 <form action="{{ route('konsentrasi_keahlian.destroy', $item->id_konsentrasi_keahlian) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

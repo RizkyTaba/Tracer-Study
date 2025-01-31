@@ -42,7 +42,7 @@
                 <td>{{ $item->tracer_kuliah_alamat }}</td>
                 <td>
                     <a href="{{ route('tracer_kuliah.edit', $item->id_tracer_kuliah) }}" class="btn btn-warning btn-sm">
-                        <i class="fa fa-edit"></i> Edit
+                        <i class="fa fa-edit"></i> Ubah
                     </a>
                     <form action="{{ route('tracer_kuliah.destroy', $item->id_tracer_kuliah) }}" method="POST" style="display:inline-block;">
                         @csrf

@@ -53,7 +53,7 @@
     @include('layouts.home') <!-- Include the navbar -->
     <!-- Video Background -->
     <video class="video-background" autoplay muted loop>
-        <source src="{{ asset('videos/video.mp4') }}" type="video/mp4">
+        <source src="{{ asset('videos/Alumni.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -63,10 +63,10 @@
     <!-- Content -->
     <div class="hero">
         <div class="container">
-            <h1>Tracer Study App</h1>
-            <p>Welcome To Our Tracer Study App</p>
-            <a href="{{ route('login') }}" class="btn btn-light btn-lg">Login</a>
-            <a href="{{ route('register') }}" class="btn btn-outline-light btn-lg">Register</a>
+            <h1>Aplikasi Tracer Study</h1>
+            <p>Selamat Datang di Aplikasi Tracer Study Kami</p>
+            <a href="{{ route('login') }}" class="btn btn-light btn-lg">Masuk</a>
+            {{-- <a href="{{ route('register') }}" class="btn btn-outline-light btn-lg">Daftar</a> --}}
         </div>
     </div>
 

@@ -1,10 +1,10 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Edit Testimoni')
+@section('title', 'Ubah Testimoni')
 
 @section('content')
 <div class="container mt-4">
-    <h2>Edit Testimoni</h2>
+    <h2>Ubah Testimoni</h2>
     <form action="{{ route('testimoni.update', $testimoni->id_testimoni) }}" method="POST">
         @csrf
         @method('PUT')

@@ -20,7 +20,7 @@
                         <td>{{ $status->id_status_alumni }}</td>
                         <td>{{ $status->status }}</td>
                         <td>
-                            <a href="{{ route('status_alumni.edit', $status->id_status_alumni) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('status_alumni.edit', $status->id_status_alumni) }}" class="btn btn-warning">Ubah</a>
                             <form action="{{ route('status_alumni.destroy', $status->id_status_alumni) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

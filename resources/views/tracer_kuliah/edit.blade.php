@@ -1,10 +1,10 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Edit Tracer Kuliah')
+@section('title', 'Ubah Tracer Kuliah')
 
 @section('content')
 <div class="container mt-4">
-    <h2>Edit Tracer Kuliah</h2>
+    <h2>Ubah Tracer Kuliah</h2>
     <form action="{{ route('tracer_kuliah.update', $tracerKuliah->id_tracer_kuliah) }}" method="POST">
         @csrf
         @method('PUT')
@@ -40,7 +40,7 @@
             <label for="tracer_kuliah_alamat" class="form-label">Alamat</label>
             <input type="text" class="form-control" id="tracer_kuliah_alamat" name="tracer_kuliah_alamat" value="{{ $tracerKuliah->tracer_kuliah_alamat }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        <button type="submit" class="btn btn-primary">Perbarui</button>
         <a href="{{ route('tracer_kuliah.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>

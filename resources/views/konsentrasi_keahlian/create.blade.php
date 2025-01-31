@@ -1,6 +1,6 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Create Konsentrasi Keahlian')
+@section('title', 'Tambah Konsentrasi Keahlian')
 
 @section('content')
 <div class="container mt-4">
