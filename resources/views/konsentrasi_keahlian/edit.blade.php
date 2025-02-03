@@ -13,8 +13,8 @@
             <select name="id_program_keahlian" id="id_program_keahlian" class="form-control" required>
                 <option value="">Pilih Program Keahlian</option>
                 @foreach ($programKeahlian as $program)
-                    <option value="{{ $program->program_keahlian }}" {{ $program->program_keahlian == $konsentrasiKeahlian->program_keahlian ? 'selected' : '' }}>
-                        {{ $program->id_program_keahlian }}
+                    <option value="{{ $program->id_program_keahlian }}" {{ $program->id_program_keahlian == $konsentrasiKeahlian->id_program_keahlian ? 'selected' : '' }}>
+                        {{ $program->program_keahlian }}
                     </option>
                 @endforeach
             </select>

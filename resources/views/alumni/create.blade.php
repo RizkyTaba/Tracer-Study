@@ -5,7 +5,7 @@
 @section('content')
 <div class="container mt-4">
     <h2 class="mb-4">Tambah Alumni</h2>
-    <form action="{{ route('alumni.store') }}" method="POST">
+    <form action="{{ route('alumni.store') }}" method="POST" class="animated-form">
         @csrf
         <div class="row">
             <!-- Kolom Kiri -->
@@ -191,3 +191,20 @@
     </form>
 </div>
 @endsection
+
+<style>
+    .animated-form {
+        animation: slideIn 0.5s ease-in-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>

@@ -3,6 +3,30 @@
 @section('title', 'Ubah Data Alumni')
 
 @section('content')
+<style>
+    /* Animasi untuk elemen form */
+    .form-control {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #007bff; /* Ganti dengan warna yang diinginkan */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ganti dengan warna yang diinginkan */
+    }
+
+    .mb-3 {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
 <div class="container mt-4">
     <h2 class="mb-4">Ubah Data Alumni</h2>
     <form action="{{ route('alumni.update', $alumni->id_alumni) }}" method="POST">

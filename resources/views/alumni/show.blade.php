@@ -1,15 +1,30 @@
 @extends('layouts.admin-home')
 
-@section('title', 'Profil Saya')
+@section('title', 'Profil Alumni')
 
 @section('content')
+<style>
+    /* Animasi untuk elemen form */
+    .card {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
 <div class="container mt-4">
-    <h1 class="mb-4">Profil Saya</h1>
+    <h1 class="mb-4">Profil Alumni</h1>
 
     <!-- Kartu Informasi Pribadi -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
-            <h5 class="card-title mb-0">Data Pribadi</h5>
+            <h5 class="card-title mb-0">Data</h5>
         </div>
         <div class="card-body">
             <div class="row">
@@ -40,7 +55,7 @@
     <!-- Kartu Riwayat Pekerjaan -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-success text-white">
-            <h5 class="card-title mb-0">Riwayat Pekerjaan</h5>
+            <h5 class="card-title mb-0">Pekerjaan</h5>
         </div>
         <div class="card-body">
             @if($alumni->tracerKerja && count($alumni->tracerKerja) > 0)
@@ -71,7 +86,7 @@
     <!-- Kartu Riwayat Pendidikan -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-info text-white">
-            <h5 class="card-title mb-0">Riwayat Pendidikan</h5>
+            <h5 class="card-title mb-0">Pendidikan</h5>
         </div>
         <div class="card-body">
             @if($alumni->tracerKuliah && count($alumni->tracerKuliah) > 0)
@@ -99,7 +114,7 @@
 
     <!-- Tombol Aksi -->
     <div class="text-center mb-4">
-        <a href="{{ route('alumni.edit', $alumni->id_alumni) }}" class="btn btn-primary">Sunting Profil</a>
+        <a href="{{ route('alumni.edit', $alumni->id_alumni) }}" class="btn btn-primary">Edit Data</a>
         <a href="{{ route('alumni.index') }}" class="btn btn-secondary">Kembali</a>
     </div>
 </div>

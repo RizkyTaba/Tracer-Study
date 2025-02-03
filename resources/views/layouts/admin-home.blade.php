@@ -10,102 +10,159 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --hover-color: #2980b9;
+            --text-light: #ecf0f1;
+            --danger-color: #e74c3c;
+        }
+
         /* Sidebar Styles */
         .sidebar {
             width: 250px;
             height: 100vh;
-            background-color: #343a40;
-            color: #fff;
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             overflow-y: auto;
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
+            position: fixed;
+            left: 0;
+            top: 0;
         }
+
         .sidebar.collapsed {
-            width: 60px;
+            width: 70px;
         }
-        .sidebar.collapsed .sidebar-header,
-        .sidebar.collapsed .nav-link-text {
-            display: none;
-        }
+
         .sidebar-header {
-            padding: 20px;
-            text-align: center;
-            background-color: #2c3136;
+            padding: 1.5rem 1rem;
+            background: rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .sidebar-header a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
+
         .sidebar ul li a {
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
-            color: #fff;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
+            padding: 0.8rem 1.5rem;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
         }
+
         .sidebar ul li a:hover {
-            background-color: #495057;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 3px solid var(--accent-color);
         }
-        .sidebar ul li a i {
-            margin-right: 10px;
-        }
+
         .sidebar-toggle {
             position: fixed;
-            top: 10px;
-            left: 10px;
+            top: 1rem;
+            left: 1rem;
             z-index: 1000;
-            background-color: #343a40;
-            color: #fff;
+            background-color: var(--accent-color);
+            color: var(--text-light);
             border: none;
-            padding: 10px;
-            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
+
+        .sidebar-toggle:hover {
+            background-color: var(--hover-color);
+        }
+
         .main-content {
             margin-left: 250px;
-            transition: margin-left 0.3s ease;
-            overflow-y: auto;
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-        }
-        .main-content.expanded {
-            margin-left: 60px;
-        }
-        body {
+            padding: 2rem;
+            min-height: 100vh;
             background-color: #f8f9fa;
+            transition: all 0.3s ease;
         }
+
+        .main-content.expanded {
+            margin-left: 70px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .user-info {
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Logout Button Style */
+        .logout-button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            width: 100%;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .sidebar {
-                width: 100%;
-                height: auto;
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 1000;
-                background-color: #343a40;
-                color: #fff;
-                transition: width 0.3s ease;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 100%; /* Full width on small screens */
+                height: auto; /* Auto height */
+                position: relative; /* Change to relative */
             }
+
             .main-content {
-                margin-left: 0;
-                transition: margin-left 0.3s ease;
+                margin-left: 0; /* No margin on small screens */
+                padding: 1rem; /* Adjust padding */
             }
         }
-        .sidebar::-webkit-scrollbar {
-            display: none;
+
+        /* Animation for menu items */
+        .sidebar ul li a {
+            position: relative;
+            overflow: hidden;
         }
-        .main-content::-webkit-scrollbar {
-            display: none;
+
+        .sidebar ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
         }
-        .list-unstyled.collapsed{
-            visibility: visible !important;
+
+        .sidebar ul li a:hover::after {
+            width: 100%;
+        }
+
+        .sidebar.collapsed .nav-link-text {
+            display: none; /* Sembunyikan teks saat sidebar ditutup */
+        }
+
+        /* Adjust this for better responsiveness */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem; /* Adjust padding for small screens */
+            }
+        }
+
+        body {
+            background-color: #f8f9fa; /* Menambahkan warna latar belakang untuk body */
         }
     </style>
 </head>
@@ -189,14 +246,14 @@
     <script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        // Fungsi untuk toggle sidebar
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('main-content');
+            
             sidebar.classList.toggle('collapsed');
+            sidebar.classList.toggle('active');
             mainContent.classList.toggle('expanded');
-    
-            // Simpan status sidebar di localStorage
+
             const isCollapsed = sidebar.classList.contains('collapsed');
             localStorage.setItem('sidebarCollapsed', isCollapsed);
         }

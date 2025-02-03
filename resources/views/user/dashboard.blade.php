@@ -47,12 +47,12 @@
                     placeholder="Berikan testimoni Anda" 
                     required
                 >{{ old('testimoni', isset($testimoni) ? $testimoni->testimoni : '') }}</textarea>
-
+        
                 @error('testimoni')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
-
+        
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div>
                     @if(isset($testimoni))
@@ -63,7 +63,7 @@
                         </button>
                     @endif
                 </div>
-
+        
                 <button type="submit" 
                         id="saveBtn" 
                         class="w-full sm:w-auto bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition-colors duration-300">

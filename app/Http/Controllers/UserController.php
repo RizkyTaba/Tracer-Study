@@ -125,6 +125,10 @@ class UserController extends Controller
 
             $tracer = TracerKerja::create($data);
 
+            // Update alumni status to 'Bekerja'
+            $alumni->status = 'Bekerja';
+            $alumni->save();
+
             return redirect()->back()->with('success', 'Data pekerjaan berhasil disimpan');
         } catch (\Exception $e) {
             return redirect()->back()
@@ -202,6 +206,10 @@ class UserController extends Controller
             ];
 
             $tracer = TracerKuliah::create($data);
+
+            // Update alumni status to 'Kuliah'
+            $alumni->status = 'Kuliah';
+            $alumni->save();
 
             return redirect()->back()->with('success', 'Data kuliah berhasil disimpan');
         } catch (\Exception $e) {

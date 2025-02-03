@@ -3,6 +3,28 @@
 @section('title', 'Daftar Testimoni')
 
 @section('content')
+<style>
+    .table {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .btn {
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .table th, .table td {
+        text-align: center; /* Rata tengah untuk header dan sel */
+    }
+</style>
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
         <h2>Daftar Testimoni</h2>
@@ -32,13 +54,13 @@
                 <td>{{ $item->tgl_testimoni }}</td>
                 <td>
                     <a href="{{ route('testimoni.edit', $item->id_testimoni) }}" class="btn btn-warning btn-sm">
-                        <i class="fa fa-edit"></i> Ubah
+                        <i class="fa fa-edit"></i>
                     </a>
                     <form action="{{ route('testimoni.destroy', $item->id_testimoni) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">
-                            <i class="fa fa-trash"></i> Hapus
+                            <i class="fa fa-trash"></i>
                         </button>
                     </form>
                 </td>

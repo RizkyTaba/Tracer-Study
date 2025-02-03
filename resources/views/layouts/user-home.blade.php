@@ -104,7 +104,7 @@
                 transition: all 0.3s ease;
             }
             .mobile-menu a:hover {
-                background-color: #f5f5f5;
+                background-color: #eaeaea;
                 color: #1d72b8;
             }
             .mobile-menu .logout-button {
@@ -131,8 +131,8 @@
 
             <div class="nav-links">
                 <a href="{{ route('user.dashboard') }}">Dashboard</a>
-                <a href="{{ route('user.Pekerjaan') }}">Tracer Kerja</a>
-                <a href="{{ route('user.Kuliah') }}">Tracer Kuliah</a>
+                <a href="{{ route('user.Pekerjaan') }}">Kuesioner Kerja</a>
+                <a href="{{ route('user.Kuliah') }}">Kuesioner Kuliah</a>
                 <a href="{{ route('user.profil') }}">Profil</a>
                 @auth
                     
@@ -153,8 +153,8 @@
 
         <div class="mobile-menu">
             <a href="{{ route('user.dashboard') }}">Dashboard</a>
-            <a href="{{ route('user.Pekerjaan') }}">Tracer Kerja</a>
-            <a href="{{ route('user.Kuliah') }}">Tracer Kuliah</a>
+            <a href="{{ route('user.Pekerjaan') }}">Kuesioner Kerja</a>
+            <a href="{{ route('user.Kuliah') }}">Kuesioner Kuliah</a>
             <a href="{{ route('user.profil') }}">Profil</a>
             @auth
                 <div class="user-name">{{ Auth::user()->name }}</div>

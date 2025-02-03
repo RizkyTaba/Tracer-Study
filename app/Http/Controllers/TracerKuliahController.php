@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TracerKuliah;
 use App\Models\Alumni;
-
+use App\Models\StatusAlumni;
 class TracerKuliahController extends Controller
 {
     /**
@@ -42,6 +42,18 @@ class TracerKuliahController extends Controller
         ]);
 
         TracerKuliah::create($request->all());
+
+        $alumni = Alumni::findOrFail($request->id_alumni);
+        
+        // Cek apakah status alumni sudah ada
+        $statusAlumni = StatusAlumni::firstOrNew(['id_status_alumni' => 2]);
+        $statusAlumni->status = 'Kuliah'; // Menyimpan status sebagai 'Bekerja'
+        $statusAlumni->save();
+        
+        // Jika Anda ingin mengaitkan status dengan alumni, Anda bisa menambahkan logika di sini
+
+        $alumni->id_status_alumni = $statusAlumni->id_status_alumni;
+        $alumni->save();
 
         return redirect()->route('tracer_kuliah.index')->with('success', 'Tracer Kuliah berhasil ditambahkan.');
     }

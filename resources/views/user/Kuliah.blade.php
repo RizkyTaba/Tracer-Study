@@ -323,7 +323,7 @@
 
 <div class="form-container">
     <div class="form-header">
-        <h4>{{ isset($tracer) ? 'Edit' : 'Tambah' }} Data Kuliah</h4>
+        <h4>{{ isset($tracer) ? 'Edit' : 'Tambah' }} Data Kuesioner Kuliah</h4>
     </div>
     
     <div class="tab-pane fade show active" id="kuliah" role="tabpanel">
@@ -371,9 +371,9 @@
                             @php
                                 $jenjang = old('tracer_kuliah_jenjang', $tracer->tracer_kuliah_jenjang ?? '');
                             @endphp
-                            <option value="D3" {{ $jenjang == 'D3' ? 'selected' : '' }}>D3</option>
-                            <option value="D4" {{ $jenjang == 'D4' ? 'selected' : '' }}>D4</option>
-                            <option value="S1" {{ $jenjang == 'S1' ? 'selected' : '' }}>S1</option>
+                            <option value="d3" {{ $jenjang == 'D3' ? 'selected' : '' }}>D3</option>
+                            <option value="d4" {{ $jenjang == 'D4' ? 'selected' : '' }}>D4</option>
+                            <option value="s1" {{ $jenjang == 'S1' ? 'selected' : '' }}>S1</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -383,9 +383,9 @@
                             @php
                                 $status = old('tracer_kuliah_status', $tracer->tracer_kuliah_status ?? '');
                             @endphp
-                            <option value="Aktif" {{ $status == 'Aktif' ? 'selected' : '' }}>Aktif</option>
-                            <option value="DO" {{ $status == 'DO' ? 'selected' : '' }}>DO</option>
-                            <option value="Lulus" {{ $status == 'Lulus' ? 'selected' : '' }}>Lulus</option>
+                            <option value="aktif" {{ $status == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                            <option value="do" {{ $status == 'DO' ? 'selected' : '' }}>DO</option>
+                            <option value="lulus" {{ $status == 'Lulus' ? 'selected' : '' }}>Lulus</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -395,8 +395,8 @@
                             @php
                                 $linier = old('tracer_kuliah_linier', $tracer->tracer_kuliah_linier ?? '');
                             @endphp
-                            <option value="Ya" {{ $linier == 'Ya' ? 'selected' : '' }}>Ya</option>
-                            <option value="Tidak" {{ $linier == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                            <option value="linear" {{ $linier == 'linear' ? 'selected' : '' }}>Linear</option>
+                            <option value="non-linear" {{ $linier == 'non-linear' ? 'selected' : '' }}>Non-Linear</option>
                         </select>
                     </div>
                 </div>

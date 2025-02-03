@@ -66,7 +66,7 @@
     <!-- Work History Card -->
     <div class="card shadow-sm mb-4 animate-slide-in" style="animation-delay: 0.3s">
         <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">Riwayat Pekerjaan</h5>
+            <h5 class="card-title mb-0">Pekerjaan</h5>
         </div>
         <div class="card-body">
             @if($alumni->tracerKerja && count($alumni->tracerKerja) > 0)
@@ -97,7 +97,7 @@
     <!-- Education History Card -->
     <div class="card shadow-sm mb-4 animate-slide-in" style="animation-delay: 0.5s">
         <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">Riwayat Perkuliahan</h5>
+            <h5 class="card-title mb-0">Perkuliahan</h5>
         </div>
         <div class="card-body">
             @if($alumni->tracerKuliah && count($alumni->tracerKuliah) > 0)

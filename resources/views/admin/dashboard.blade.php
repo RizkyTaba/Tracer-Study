@@ -5,33 +5,33 @@
 @section('header', 'Selamat Datang di Beranda')
 
 @section('content')
-    <div class="container mx-auto mt-4">
-        <h1 class="text-2xl font-semibold mb-4">Beranda</h1>
+    <div class="container mx-auto mt-4" style="background-color: #f8f9fa; border-radius: 8px; padding: 20px;">
+        <h1 class="text-2xl font-semibold mb-4" style="color: #343a40;">Beranda</h1>
 
         <!-- Statistik -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                @foreach($stats as $stat)
-                    <div class="bg-{{ $stat['color'] }} text-white p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:shadow-lg">
-                        <div class="flex items-center">
-                            <div class="mr-4">
-                                <i class="fa fa-{{ $stat['icon'] }} fa-3x"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-3xl font-bold">{{ $stat['value'] }}</h2>
-                                <p>{{ $stat['label'] }}</p>
-                            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            @foreach($stats as $stat)
+                <div class="{{ $stat['color'] }} text-white p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105 hover:shadow-lg">
+                    <div class="flex items-center">
+                        <div class="mr-4">
+                            <i class="fa fa-{{ $stat['icon'] }} fa-3x"></i>
                         </div>
-                        <a href="{{ $stat['route'] }}" class="text-white underline mt-2 inline-block">Lihat Detail <i class="fa fa-arrow-circle-right"></i></a>
+                        <div>
+                            <h2 class="text-3xl font-bold">{{ $stat['value'] }}</h2>
+                            <p>{{ $stat['label'] }}</p>
+                        </div>
                     </div>
-                @endforeach
-            </div>
+                    <a href="{{ $stat['route'] }}" class="text-white underline mt-2 inline-block hover:text-gray-300">Lihat Detail <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            @endforeach
+        </div>
 
         <!-- Grafik dan Daftar Alumni -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-8">
             <!-- Daftar Alumni -->
             <div class="col-span-1">
-                <h2 class="text-center text-xl font-semibold mb-4">Alumni Terbaru</h2>
-                <div class="bg-white p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105 hover:shadow-lg">
+                <h2 class="text-center text-xl font-semibold mb-4" style="color: #343a40;">Alumni Terbaru</h2>
+                <div class="bg-white p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:shadow-lg">
                     <div class="list-group">
                         @foreach($alumni as $alumnus)
                             <a href="{{ route('alumni.show', $alumnus->id_alumni) }}" class="list-group-item list-group-item-action flex items-center hover:bg-gray-100 transition duration-300">
@@ -44,8 +44,8 @@
 
             <!-- Grafik -->
             <div class="col-span-1 lg:col-span-2">
-                <h2 class="text-center text-xl font-semibold mb-4">Ringkasan Data</h2>
-                <div class="bg-white p-4 rounded-lg shadow-md transform transition duration-500 hover:scale-105 hover:shadow-lg">
+                <h2 class="text-center text-xl font-semibold mb-4" style="color: #343a40;">Ringkasan Data</h2>
+                <div class="bg-white p-4 rounded-lg shadow-md">
                     <canvas id="pieChart" width="500" height="500" style="max-width: 600px; margin: auto;"></canvas>
                 </div>
             </div>
@@ -70,16 +70,16 @@
                     datasets: [{
                         data: data,
                         backgroundColor: [
-                            'rgba(239 68 68)', // Merah
+                            'rgba(239, 68, 68)', // Merah
                             'rgba(0, 123, 255, 1)', // Biru
                             'rgba(255, 193, 7, 1)', // Kuning
-                            'rgba(128, 128, 128, 1)', // Abu-abu
+                            'rgba(40, 167, 69, 1)', // Abu-abu
                         ],
                         borderColor: [
-                            'rgba(250 100 100)', // Merah
-                            'rgba(0, 125, 300, 1)', // Biru
-                            'rgba(255, 200, 10, 1)', // Kuning
-                            'rgba(130, 130, 130, 1)', // Abu-abu
+                            'rgba(255, 255, 255, 1)', // Merah
+                            'rgba(255, 255, 255, 1)', // Biru
+                            'rgba(255, 255, 255, 1)', // Kuning
+                            'rgba(255, 255, 255, 1)', // Abu-abu
                         ],
                         borderWidth: 1,
                     }]

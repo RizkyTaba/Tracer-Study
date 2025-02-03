@@ -31,7 +31,7 @@
 <!-- Form Tracer Kerja -->
 <div class="form-container">
     <div class="form-header">
-        <h4>{{ isset($tracer) ? 'Edit' : 'Tambah' }} Data Pekerjaan</h4>
+        <h4>{{ isset($tracer) ? 'Edit' : 'Tambah' }} Data Kuesioner Pekerjaan</h4>
     </div>
     
     <div class="tab-pane fade show active" id="kerja" role="tabpanel">
@@ -67,9 +67,9 @@
                             @php
                                 $status = old('tracer_kerja_status', $tracer->tracer_kerja_status ?? '');
                             @endphp
-                            <option value="Tetap" {{ $status == 'Tetap' ? 'selected' : '' }}>Karyawan Tetap</option>
-                            <option value="Kontrak" {{ $status == 'Kontrak' ? 'selected' : '' }}>Karyawan Kontrak</option>
-                            <option value="Freelance" {{ $status == 'Freelance' ? 'selected' : '' }}>Pekerja Lepas (Freelance)</option>
+                            <option value="tetap" {{ $status == 'tetap' ? 'selected' : '' }}>Karyawan Tetap</option>
+                            <option value="kontrak" {{ $status == 'kontrak' ? 'selected' : '' }}>Karyawan Kontrak</option>
+                            <option value="freelance" {{ $status == 'freelance' ? 'selected' : '' }}>Pekerja Lepas (Freelance)</option>
                         </select>
                     </div>
                 </div>

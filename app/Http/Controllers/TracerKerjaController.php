@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TracerKerja;
 use App\Models\Alumni;
+use App\Models\StatusAlumni;
 
 class TracerKerjaController extends Controller
 {
@@ -44,6 +45,19 @@ class TracerKerjaController extends Controller
         ]);
 
         TracerKerja::create($request->all());
+
+        // Update status alumni menjadi 'Bekerja' dengan ID status 1
+        $alumni = Alumni::findOrFail($request->id_alumni);
+        
+        // Cek apakah status alumni sudah ada
+        $statusAlumni = StatusAlumni::firstOrNew(['id_status_alumni' => 1]);
+        $statusAlumni->status = 'Bekerja'; // Menyimpan status sebagai 'Bekerja'
+        $statusAlumni->save();
+        
+        // Jika Anda ingin mengaitkan status dengan alumni, Anda bisa menambahkan logika di sini
+
+        $alumni->id_status_alumni = $statusAlumni->id_status_alumni;
+        $alumni->save();
 
         return redirect()->route('tracer_kerja.index')->with('success', 'Tracer Kerja berhasil ditambahkan.');
     }
