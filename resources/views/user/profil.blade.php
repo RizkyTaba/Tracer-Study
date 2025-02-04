@@ -126,6 +126,8 @@
     <!-- Action Buttons -->
     <div class="text-center mb-4 animate-fade-in" style="animation-delay: 0.7s">
         <a href="{{ route('user.dashboard') }}" class="btn btn-secondary">Kembali ke Dashboard</a>
+        {{-- <a href="{{ route('user.editprofil', $alumni->id_alumni) }}" class="btn btn-primary">Edit Profil</a> --}}
     </div>
+        
 </div>
 @endsection
