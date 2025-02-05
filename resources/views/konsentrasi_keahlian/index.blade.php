@@ -4,6 +4,31 @@
 
 @section('content')
     <div class="container mx-auto mt-4">
+        @if(session('success'))
+            <div class="alert alert-success fade show" role="alert" style="animation: fadeIn 0.5s;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger fade show" role="alert" style="animation: fadeIn 0.5s;">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <!-- Tambahkan CSS untuk animasi -->
+        <style>
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
         <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Daftar Konsentrasi Keahlian</h1>
         <div class="d-flex justify-content-end mb-4">
             <a href="{{ route('konsentrasi_keahlian.create')}}" class="btn btn-primary mb-4 transition duration-300 ease-in-out transform hover:scale-105"><i class="fa fa-plus mr-2"></i>Tambah Konsentrasi Keahlian</a>

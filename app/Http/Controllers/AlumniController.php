@@ -137,6 +137,12 @@ class AlumniController extends Controller
     public function destroy($id)
     {
         $alumni = Alumni::findOrFail($id);
+        
+        // Cek apakah ada alumni yang menggunakan TahunLulus ini
+        if ($alumni->id_tahun_lulus) {
+            return redirect()->route('alumni.index')->with('error', 'Data Tahun Lulus tidak dapat dihapus karena masih digunakan oleh alumni.');
+        }
+
         $alumni->delete();
 
         return redirect()->route('alumni.index')->with('success', 'Data Alumni berhasil dihapus.');

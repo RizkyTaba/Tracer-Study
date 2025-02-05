@@ -83,12 +83,17 @@ class BidangKeahlianController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(BidangKeahlian $bidangKeahlian)
-{
-    $bidangKeahlian->delete();
+    {
+        // Cek apakah ada ProgramKeahlian yang menggunakan BidangKeahlian ini
+        if ($bidangKeahlian->programKeahlian()->count() > 0) {
+            return redirect()->route('bidang_keahlian.index')->with('error', 'Data Bidang Keahlian tidak dapat dihapus karena masih digunakan oleh Program Keahlian.');
+        }
 
-    // Reset auto-increment
-    DB::statement('ALTER TABLE tbl_bidang_keahlian AUTO_INCREMENT = 1');
+        $bidangKeahlian->delete();
 
-    return redirect()->route('bidang_keahlian.index')->with('success', 'Bidang keahlian deleted successfully.');
-}
+        // Reset auto-increment
+        DB::statement('ALTER TABLE tbl_bidang_keahlian AUTO_INCREMENT = 1');
+
+        return redirect()->route('bidang_keahlian.index')->with('success', 'Bidang Keahlian deleted successfully.');
+    }
 }

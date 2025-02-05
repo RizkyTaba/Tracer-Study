@@ -3,6 +3,30 @@
 @section('title', 'Daftar Status Alumni')
 
 @section('content')
+        @if(session('success'))
+            <div class="alert alert-success fade show" role="alert" style="animation: fadeIn 0.5s;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger fade show" role="alert" style="animation: fadeIn 0.5s;">
+                {{ session('error') }}
+            </div>
+        @endif
+
+    <style>
+        @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+    </style>
     <div class="container mx-auto mt-4">
         <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Daftar Status Alumni</h1>
         <a href="{{ route('status_alumni.create') }}" class="btn btn-primary mb-4 transition duration-300 ease-in-out transform hover:scale-105"><i class="fa fa-plus mr-2"></i>Tambah Status</a>

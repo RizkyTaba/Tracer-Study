@@ -12,4 +12,9 @@ class StatusAlumni extends Model
     protected $table = 'tbl_status_alumni'; // Nama tabel
     protected $primaryKey = 'id_status_alumni'; // Primary Key
     protected $fillable = ['status']; // Kolom yang dapat diisi
+
+    public function alumni()
+    {
+        return $this->hasMany(Alumni::class, 'id_status_alumni', 'id_status_alumni');
+    }
 }

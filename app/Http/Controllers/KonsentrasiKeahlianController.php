@@ -55,7 +55,14 @@ class KonsentrasiKeahlianController extends Controller
 
     public function destroy($id)
     {
-        KonsentrasiKeahlian::destroy($id);
+        $konsentrasiKeahlian = KonsentrasiKeahlian::findOrFail($id);
+        
+        // Cek apakah ada alumni yang menggunakan KonsentrasiKeahlian ini
+        if ($konsentrasiKeahlian->alumni()->count() > 0) {
+            return redirect()->route('konsentrasi_keahlian.index')->with('error', 'Data Konsentrasi Keahlian tidak dapat dihapus karena masih digunakan oleh alumni.');
+        }
+
+        $konsentrasiKeahlian->delete();
 
         DB::statement('ALTER TABLE tbl_bidang_keahlian AUTO_INCREMENT = 1');
 

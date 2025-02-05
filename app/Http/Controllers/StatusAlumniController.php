@@ -66,6 +66,12 @@ class StatusAlumniController extends Controller
     public function destroy($id)
     {
         $statusAlumni = StatusAlumni::findOrFail($id);
+        
+        // Cek apakah ada alumni yang menggunakan StatusAlumni ini
+        if ($statusAlumni->alumni()->count() > 0) {
+            return redirect()->route('status_alumni.index')->with('error', 'Data Status Alumni tidak dapat dihapus karena masih digunakan oleh alumni.');
+        }
+
         $statusAlumni->delete();
         return redirect()->route('status_alumni.index')->with('success', 'Status alumni berhasil dihapus.');
     }

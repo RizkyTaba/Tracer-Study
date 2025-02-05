@@ -75,9 +75,6 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     // ----------------
 
     // Program Keahlian
-    Route::get('admin/program_keahlian', [ProgramKeahlianController::class, 'index'])->name('program_keahlian.index');
-    Route::get('admin/program_keahlian/create', [ProgramKeahlianController::class, 'create'])->name('program_keahlian.create');
-    Route::get('admin/program_keahlian/{program_keahlian}/edit', [ProgramKeahlianController::class, 'edit'])->name('program_keahlian.edit');
     Route::resource('admin/program_keahlian', ProgramKeahlianController::class);
     //----------------
 

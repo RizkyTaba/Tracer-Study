@@ -22,4 +22,14 @@ class KonsentrasiKeahlian extends Model
     {
         return $this->belongsTo(ProgramKeahlian::class, 'id_program_keahlian', 'id_program_keahlian');
     }
+
+    public function alumni()
+    {
+        return $this->hasMany(Alumni::class, 'id_konsentrasi_keahlian', 'id_konsentrasi_keahlian'); // Sesuaikan dengan kolom yang tepat
+    }
+
+    public function bidangKeahlian()
+    {
+        return $this->belongsTo(BidangKeahlian::class, 'id_bidang_keahlian', 'id_bidang_keahlian');
+    }
 }

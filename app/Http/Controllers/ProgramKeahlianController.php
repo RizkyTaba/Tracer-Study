@@ -64,6 +64,11 @@ class ProgramKeahlianController extends Controller
 
     public function destroy(ProgramKeahlian $programKeahlian)
     {
+        // Cek apakah ada KonsentrasiKeahlian yang menggunakan ProgramKeahlian ini
+        if ($programKeahlian->konsentrasiKeahlian()->count() > 0) {
+            return redirect()->route('program_keahlian.index')->with('error', 'Data Program Keahlian tidak dapat dihapus karena masih digunakan oleh Konsentrasi Keahlian.');
+        }
+
         $programKeahlian->delete();
 
         DB::statement('ALTER TABLE tbl_bidang_keahlian AUTO_INCREMENT = 1');

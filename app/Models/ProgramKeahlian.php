@@ -22,6 +22,11 @@ class ProgramKeahlian extends Model
 
     public function bidangKeahlian()
     {
-        return $this->belongsTo(BidangKeahlian::class, 'id_bidang_keahlian');
+        return $this->belongsTo(BidangKeahlian::class, 'id_bidang_keahlian', 'id_bidang_keahlian');
+    }
+
+    public function konsentrasiKeahlian()
+    {
+        return $this->hasMany(KonsentrasiKeahlian::class, 'id_program_keahlian', 'id_program_keahlian'); // Sesuaikan dengan kolom yang tepat
     }
 }

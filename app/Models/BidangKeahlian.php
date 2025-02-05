@@ -17,8 +17,8 @@ class BidangKeahlian extends Model
         'bidang_keahlian',
     ];
 
-    public function programKeahlians()
+    public function programKeahlian()
     {
-        return $this->hasMany(ProgramKeahlian::class, 'id_bidang_keahlian');
+        return $this->hasMany(ProgramKeahlian::class, 'id_bidang_keahlian', 'id_bidang_keahlian');
     }
 }

@@ -34,21 +34,21 @@ class Alumni extends Model
 
     public function tahunLulus()
     {
-        return $this->belongsTo(TahunLulus::class, 'id_tahun_lulus');
+        return $this->belongsTo(TahunLulus::class, 'id_tahun_lulus', 'id_tahun_lulus');
     }
     public function konsentrasiKeahlian()
     {
-        return $this->belongsTo(KonsentrasiKeahlian::class, 'id_konsentrasi_keahlian');
+        return $this->belongsTo(KonsentrasiKeahlian::class, 'id_konsentrasi_keahlian', 'id_konsentrasi_keahlian');
     }
 
     public function statusAlumni()
     {
-        return $this->belongsTo(StatusAlumni::class, 'id_status_alumni');
+        return $this->belongsTo(StatusAlumni::class, 'id_status_alumni', 'id_status_alumni');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_alumni', 'id');
+        return $this->belongsTo(User::class, 'id_alumni', 'id_alumni');
     }
 
     public function tracerKerja()
@@ -59,5 +59,10 @@ class Alumni extends Model
     public function tracerKuliah()
     {
         return $this->hasMany(TracerKuliah::class, 'id_alumni', 'id_alumni');
+    }
+
+    public function programKeahlian()
+    {
+        return $this->belongsTo(ProgramKeahlian::class, 'id_program_keahlian', 'id_program_keahlian');
     }
 }

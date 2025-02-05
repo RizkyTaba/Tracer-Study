@@ -16,4 +16,9 @@ class TahunLulus extends Model
         'tahun_lulus',
         'keterangan',
     ];
+
+    public function alumni()
+    {
+        return $this->hasMany(Alumni::class, 'id_tahun_lulus', 'id_tahun_lulus');
+    }
 }
