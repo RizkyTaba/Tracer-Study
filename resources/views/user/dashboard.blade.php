@@ -9,7 +9,7 @@
     <div class="flex flex-col md:flex-row items-center p-4 md:p-6 gap-6">
         <div class="w-full md:w-1/2 flex flex-col justify-center transform transition-all duration-500 hover:scale-105">
             <h2 class="text-xl md:text-2xl lg:text-3xl font-bold animate-fade-in text-center md:text-left">
-                Selamat datang di Tracer Study
+                Selamat datang di Tracer Studyy
             </h2>
             <p class="mt-4 text-sm md:text-base text-gray-600 animate-slide-in text-center md:text-left">
                 Melacak perjalanan karier lulusan setelah menyelesaikan pendidikan.
