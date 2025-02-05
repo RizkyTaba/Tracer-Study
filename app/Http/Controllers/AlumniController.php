@@ -120,6 +120,17 @@ class AlumniController extends Controller
 
         $alumni->save();
 
+        // Update user data
+        $user = User::where('email', $alumni->email)->first();
+        if ($user) {
+            $user->name = $request->nama_depan . ' ' . $request->nama_belakang;
+            $user->email = $request->email;
+            if ($request->filled('password')) {
+                $user->password = bcrypt($request->password);
+            }
+            $user->save();
+        }
+
         return redirect()->route('alumni.index')->with('success', 'Data Alumni berhasil diperbarui.');
     }
 

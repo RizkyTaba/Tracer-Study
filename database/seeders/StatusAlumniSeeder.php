@@ -13,9 +13,9 @@ class StatusAlumniSeeder extends Seeder
     public function run()
     {
         $statusAlumni = [];
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             // Alternatif antara "Bekerja", "Kuliah", dan "Belum Diatur"
-            $status = ($i % 3 === 0) ? 'Kuliah' : (($i % 3 === 1) ? 'Bekerja' : 'Belum Diatur');
+            $status = ($i % 2 === 0) ? 'Kuliah' : 'Bekerja';
             $statusAlumni[] = [
                 'status' => $status,
             ];

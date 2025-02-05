@@ -371,9 +371,9 @@
                             @php
                                 $jenjang = old('tracer_kuliah_jenjang', $tracer->tracer_kuliah_jenjang ?? '');
                             @endphp
-                            <option value="d3" {{ $jenjang == 'D3' ? 'selected' : '' }}>D3</option>
-                            <option value="d4" {{ $jenjang == 'D4' ? 'selected' : '' }}>D4</option>
-                            <option value="s1" {{ $jenjang == 'S1' ? 'selected' : '' }}>S1</option>
+                            <option value="D3" {{ $jenjang == 'D3' ? 'selected' : '' }}>D3</option>
+                            <option value="D4" {{ $jenjang == 'D4' ? 'selected' : '' }}>D4</option>
+                            <option value="S1" {{ $jenjang == 'S1' ? 'selected' : '' }}>S1</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -410,4 +410,4 @@
         </form>
     </div>
 </div>
-@endsection 
+@endsection
