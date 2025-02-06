@@ -22,7 +22,8 @@ class AlumniController extends Controller
         $tahunLulus = TahunLulus::all();
         $konsentrasiKeahlian = KonsentrasiKeahlian::all();
         $statusAlumni = StatusAlumni::all();
-        return view('alumni.create', compact('tahunLulus', 'konsentrasiKeahlian', 'statusAlumni'));
+        $dataSiswa = DataAlumni::all(); // Get all student data
+        return view('alumni.create', compact('tahunLulus', 'konsentrasiKeahlian', 'statusAlumni', 'dataSiswa'));
     }
 
     public function store(Request $request)

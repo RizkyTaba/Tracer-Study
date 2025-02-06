@@ -60,14 +60,76 @@
         }
         .mobile-menu-button {
             display: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu-button.active {
+            transform: rotate(90deg);
+        }
+        
+        .mobile-menu-button svg {
+            transition: stroke 0.3s ease;
+        }
+        
+        .mobile-menu-button.active svg {
+            stroke: #1d72b8;
         }
         .mobile-menu {
             display: none;
             opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(-20px);
+            transition: all 0.3s ease-in-out;
         }
         
+        .mobile-menu.closing {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+        }
+        
+        .mobile-menu.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+                clip-path: inset(0 0 100% 0);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        @keyframes textReveal {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+                clip-path: inset(0 0 0 0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+                clip-path: inset(0 0 100% 0);
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -95,6 +157,34 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+
+            .mobile-menu a,
+            .mobile-menu .user-name,
+            .mobile-menu form {
+                opacity: 0;
+                animation: slideIn 0.3s ease-out forwards;
+            }
+
+            .mobile-menu a span,
+            .mobile-menu .user-name span,
+            .mobile-menu form button {
+                display: inline-block;
+                opacity: 0;
+                animation: textReveal 0.3s ease-out forwards;
+            }
+
+            .mobile-menu a:nth-child(1) span { animation-delay: 0.2s; }
+            .mobile-menu a:nth-child(2) span { animation-delay: 0.3s; }
+            .mobile-menu a:nth-child(3) span { animation-delay: 0.4s; }
+            .mobile-menu a:nth-child(4) span { animation-delay: 0.5s; }
+            .mobile-menu .user-name span { animation-delay: 0.6s; }
+            .mobile-menu form button { animation-delay: 0.7s; }
+
+            .mobile-menu.show a,
+            .mobile-menu.show .user-name,
+            .mobile-menu.show form {
+                opacity: 1;
+            }
             .mobile-menu a {
                 padding: 0.75rem 1.5rem;
                 color: #4a4a4a;
@@ -107,9 +197,26 @@
                 background-color: #eaeaea;
                 color: #1d72b8;
             }
+            .mobile-menu form {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.75rem 1.5rem;
+                border-bottom: 1px solid #eaeaea;
+            }
+
             .mobile-menu .logout-button {
-                margin: 0.75rem 1.5rem;
-                text-align: center;
+                margin: 0;
+                width: auto;
+                order: 1;
+            }
+
+            .mobile-menu .user-name {
+                margin: 0;
+                padding: 0;
+                border-bottom: none;
+                order: 2;
+                color: #666;
             }
             .user-name {
                 padding: 0.75rem 1.5rem;
@@ -117,7 +224,11 @@
                 border-bottom: 1px solid #eaeaea;
             }
 
-            
+            .mobile-menu.closing a,
+            .mobile-menu.closing .user-name,
+            .mobile-menu.closing form {
+                animation: slideOut 0.3s ease-in forwards;
+            }
         }
     </style>
 </head>
@@ -152,15 +263,15 @@
         </div>
 
         <div class="mobile-menu">
-            <a href="{{ route('user.dashboard') }}">Dashboard</a>
-            <a href="{{ route('user.Pekerjaan') }}">Kuesioner Kerja</a>
-            <a href="{{ route('user.Kuliah') }}">Kuesioner Kuliah</a>
-            <a href="{{ route('user.profil') }}">Profil</a>
+            <a href="{{ route('user.dashboard') }}"><span>Dashboard</span></a>
+            <a href="{{ route('user.Pekerjaan') }}"><span>Kuesioner Kerja</span></a>
+            <a href="{{ route('user.Kuliah') }}"><span>Kuesioner Kuliah</span></a>
+            <a href="{{ route('user.profil') }}"><span>Profil</span></a>
             @auth
-                <div class="user-name">{{ Auth::user()->name }}</div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="logout-button">Log Out</button>
+                    <div class="user-name"><span>{{ Auth::user()->name }}</span></div>
                 </form>
             @endauth
         </div>
@@ -177,13 +288,32 @@
         const mobileMenu = document.querySelector('.mobile-menu');
 
         mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('show');
+            if (mobileMenu.classList.contains('show')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+            mobileMenuButton.classList.toggle('active');
         });
+
+        function openMobileMenu() {
+            mobileMenu.classList.remove('closing');
+            mobileMenu.classList.add('show');
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('closing');
+            setTimeout(() => {
+                mobileMenu.classList.remove('show');
+                mobileMenu.classList.remove('closing');
+            }, 300); // Match the animation duration
+        }
 
         // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-                mobileMenu.classList.remove('show');
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && mobileMenu.classList.contains('show')) {
+                closeMobileMenu();
+                mobileMenuButton.classList.remove('active');
             }
         });
     </script>

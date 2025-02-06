@@ -11,7 +11,7 @@
 
         <div class="form-group">
             <label for="kode_program_keahlian">Kode Program Keahlian</label>
-            <input type="text" class="form-control" id="kode_program_keahlian" name="kode_program_keahlian" value="{{ old('kode_program_keahlian', $programKeahlian->kode_program_keahlian) }}">
+            <input type="text" class="form-control" id="kode_program_keahlian" name="kode_program_keahlian" value="{{ old('kode_program_keahlian', $programKeahlian->kode_program_keahlian) }}" placeholder="Masukan Kode Program Keahlian Baru">
             @error('kode_program_keahlian')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -21,7 +21,7 @@
 
         <div class="form-group">
             <label for="program_keahlian">Program Keahlian</label>
-            <input type="text" class="form-control" id="program_keahlian" name="program_keahlian" value="{{ old('program_keahlian', $programKeahlian->program_keahlian) }}">
+            <input type="text" class="form-control" id="program_keahlian" name="program_keahlian" value="{{ old('program_keahlian', $programKeahlian->program_keahlian) }}" placeholder="Masukan Nama Program Keahlian Baru">
             @error('program_keahlian')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

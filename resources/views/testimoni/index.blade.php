@@ -28,9 +28,9 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
         <h2>Daftar Testimoni</h2>
-        <a href="{{ route('testimoni.create') }}" class="btn btn-primary">
+        {{-- <a href="{{ route('testimoni.create') }}" class="btn btn-primary">
             <i class="fa fa-plus mr-2"></i> Tambah Testimoni
-        </a>
+        </a> --}}
     </div>
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -53,9 +53,9 @@
                 <td>{{ $item->testimoni }}</td>
                 <td>{{ $item->tgl_testimoni }}</td>
                 <td>
-                    <a href="{{ route('testimoni.edit', $item->id_testimoni) }}" class="btn btn-warning btn-sm">
+                    {{-- <a href="{{ route('testimoni.edit', $item->id_testimoni) }}" class="btn btn-warning btn-sm">
                         <i class="fa fa-edit"></i>
-                    </a>
+                    </a> --}}
                     <form action="{{ route('testimoni.destroy', $item->id_testimoni) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')

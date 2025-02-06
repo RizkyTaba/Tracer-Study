@@ -21,11 +21,11 @@
         </div>
         <div class="form-group mb-3">
             <label for="kode_konsentrasi_keahlian">Kode Konsentrasi Keahlian</label>
-            <input type="text" name="kode_konsentrasi_keahlian" id="kode_konsentrasi_keahlian" class="form-control" value="{{ $konsentrasiKeahlian->kode_konsentrasi_keahlian }}" required>
+            <input type="text" name="kode_konsentrasi_keahlian" id="kode_konsentrasi_keahlian" class="form-control" value="{{ $konsentrasiKeahlian->kode_konsentrasi_keahlian }}" required placeholder="Masukan Kode Konsentrasi Keahlian Baru">
         </div>
         <div class="form-group mb-3">
             <label for="konsentrasi_keahlian">Konsentrasi Keahlian</label>
-            <input type="text" name="konsentrasi_keahlian" id="konsentrasi_keahlian" class="form-control" value="{{ $konsentrasiKeahlian->konsentrasi_keahlian }}" required>
+            <input type="text" name="konsentrasi_keahlian" id="konsentrasi_keahlian" class="form-control" value="{{ $konsentrasiKeahlian->konsentrasi_keahlian }}" required placeholder="Masukan Nama Konsentrasi Keahlian Baru">
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="{{ route('konsentrasi_keahlian.index') }}" class="btn btn-secondary">Kembali</a>

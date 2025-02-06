@@ -30,9 +30,9 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
         <h2>Daftar Tracer Kuliah</h2>
-        <a href="{{ route('tracer_kuliah.create') }}" class="btn btn-primary">
+        {{-- <a href="{{ route('tracer_kuliah.create') }}" class="btn btn-primary">
             <i class="fa fa-plus mr-2"></i> Tambah Tracer Kuliah
-        </a>
+        </a> --}}
     </div>
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -63,9 +63,9 @@
                 <td>{{ $item->tracer_kuliah_linier }}</td>
                 <td>{{ $item->tracer_kuliah_alamat }}</td>
                 <td>
-                    <a href="{{ route('tracer_kuliah.edit', $item->id_tracer_kuliah) }}" class="btn btn-warning btn-sm">
+                    {{-- <a href="{{ route('tracer_kuliah.edit', $item->id_tracer_kuliah) }}" class="btn btn-warning btn-sm">
                         Ubah
-                    </a>
+                    </a> --}}
                     <form action="{{ route('tracer_kuliah.destroy', $item->id_tracer_kuliah) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')

@@ -5,11 +5,13 @@
 @section('content')
 <style>
     .animate-fade-in {
-        animation: fadeIn 0.8s ease-in;
+        opacity: 0;
+        animation: fadeIn 0.8s ease-in forwards;
     }
 
     .animate-slide-in {
-        animation: slideIn 0.8s ease-out;
+        opacity: 0;
+        animation: slideIn 0.8s ease-out forwards;
     }
 
     @keyframes fadeIn {
@@ -27,13 +29,18 @@
             opacity: 1;
         }
     }
+
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
 </style>
 
 <div class="container mt-4">
     <h1 class="mb-4 animate-fade-in">Profil Saya</h1>
 
     <!-- Personal Information Card -->
-    <div class="card shadow-sm mb-4 animate-slide-in" style="animation-delay: 0.1s">
+    <div class="card shadow-sm mb-4 animate-slide-in delay-1">
         <div class="card-header bg-primary text-white">
             <h5 class="card-title mb-0">Informasi Pribadi</h5>
         </div>
@@ -64,7 +71,7 @@
     </div>
 
     <!-- Work History Card -->
-    <div class="card shadow-sm mb-4 animate-slide-in" style="animation-delay: 0.3s">
+    <div class="card shadow-sm mb-4 animate-slide-in delay-2">
         <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
             <h5 class="card-title mb-0">Pekerjaan</h5>
         </div>
@@ -95,7 +102,7 @@
     </div>
 
     <!-- Education History Card -->
-    <div class="card shadow-sm mb-4 animate-slide-in" style="animation-delay: 0.5s">
+    <div class="card shadow-sm mb-4 animate-slide-in delay-3">
         <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
             <h5 class="card-title mb-0">Perkuliahan</h5>
         </div>
@@ -124,7 +131,7 @@
     </div>
 
     <!-- Action Buttons -->
-    <div class="text-center mb-4 animate-fade-in" style="animation-delay: 0.7s">
+    <div class="text-center mb-4 animate-fade-in delay-4">
         <a href="{{ route('user.dashboard') }}" class="btn btn-secondary">Kembali ke Dashboard</a>
         {{-- <a href="{{ route('user.editprofil', $alumni->id_alumni) }}" class="btn btn-primary">Edit Profil</a> --}}
     </div>

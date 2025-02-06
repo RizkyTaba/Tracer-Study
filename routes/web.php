@@ -13,6 +13,7 @@ use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProgramKeahlianController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SiswaController;
 
 
 Route::get('/', function () {
@@ -59,6 +60,8 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     Route::get('admin/alumni/{id}', [AlumniController::class, 'show'])->name('admin.alumni.show');
     Route::resource('admin/alumni', AlumniController::class);
     // ----------------
+
+    
 
     // Tahun Lulus
     Route::resource('tahun_lulus', TahunLulusController::class);

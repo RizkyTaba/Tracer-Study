@@ -13,11 +13,11 @@
                     @method('PUT')
                     <div class="form-group mb-3">
                         <label for="tahun_lulus">Tahun Lulus</label>
-                        <input type="number" name="tahun_lulus" id="tahun_lulus" class="form-control" value="{{ $tahunLulus->tahun_lulus }}" required>
+                        <input type="number" name="tahun_lulus" id="tahun_lulus" class="form-control" value="{{ $tahunLulus->tahun_lulus }}" required placeholder="Masukan Tahun Lulus Baru">
                     </div>
                     <div class="form-group mb-3">
                         <label for="keterangan">Keterangan</label>
-                        <input type="text" name="keterangan" id="keterangan" class="form-control" value="{{ $tahunLulus->keterangan }}" required>
+                        <input type="text" name="keterangan" id="keterangan" class="form-control" value="{{ $tahunLulus->keterangan }}" required placeholder="Masukan Keterangan Baru">
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">Simpan</button>

@@ -23,11 +23,11 @@
                     @csrf
                     <div class="form-group mb-3">
                         <label for="tahun_lulus">Tahun Lulus</label>
-                        <input type="number" name="tahun_lulus" id="tahun_lulus" class="form-control" required>
+                        <input type="number" name="tahun_lulus" id="tahun_lulus" class="form-control" required placeholder="Masukan Tahun Lulus">
                     </div>
                     <div class="form-group mb-3">
                         <label for="keterangan">Keterangan</label>
-                        <input type="text" name="keterangan" id="keterangan" class="form-control" required>
+                        <input type="text" name="keterangan" id="keterangan" class="form-control" required placeholder="Masukan Keterangan">
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary animated-button">Simpan</button>

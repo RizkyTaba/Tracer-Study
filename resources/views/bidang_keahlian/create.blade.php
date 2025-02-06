@@ -12,11 +12,11 @@
                     @csrf
                     <div class="form-group mb-3">
                         <label for="kode_bidang_keahlian">Kode Bidang Keahlian</label>
-                        <input type="text" name="kode_bidang_keahlian" id="kode_bidang_keahlian" class="form-control" required>
+                        <input type="text" name="kode_bidang_keahlian" id="kode_bidang_keahlian" class="form-control" placeholder="Masukan Kode Bidang Keahlian" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="bidang_keahlian">Bidang Keahlian</label>
-                        <input type="text" name="bidang_keahlian" id="bidang_keahlian" class="form-control" required>
+                        <input type="text" name="bidang_keahlian" id="bidang_keahlian" class="form-control" placeholder="Masukan Nama Bidang Keahlian" required>
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">Simpan</button>
