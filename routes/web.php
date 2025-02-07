@@ -13,7 +13,6 @@ use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProgramKeahlianController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SiswaController;
 
 
 Route::get('/', function () {
@@ -44,6 +43,8 @@ Route::middleware(['auth', 'role:user'])->group(function(){
     Route::put('/user/testimoni/update/{id}', [UserController::class, 'updateTestimoni'])->name('user.testimoni.update');
     Route::delete('/user/testimoni/delete/{id}', [UserController::class, 'deleteTestimoni'])->name('user.testimoni.delete');
     Route::get('/user/profil', [UserController::class, 'profil'])->name('user.profil');
+    Route::get('/user/profil/edit', [UserController::class, 'editAlumni'])->name('user.editAlumni');
+    Route::put('/user/profil/update/{id}', [UserController::class, 'updateAlumni'])->name('user.updateAlumni');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function(){

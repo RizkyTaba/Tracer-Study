@@ -29,24 +29,24 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="card-text"><strong>Nama Lengkap:</strong> {{ $alumni->nama_depan }} {{ $alumni->nama_belakang }}</p>
-                    <p class="card-text"><strong>NISN:</strong> {{ $alumni->nisn }}</p>
-                    <p class="card-text"><strong>NIK:</strong> {{ $alumni->nik }}</p>
-                    <p class="card-text"><strong>Jenis Kelamin:</strong> {{ $alumni->jenis_kelamin }}</p>
-                    <p class="card-text"><strong>Tempat Lahir:</strong> {{ $alumni->tempat_lahir }}</p>
-                    <p class="card-text"><strong>Tanggal Lahir:</strong> {{ $alumni->tgl_lahir }}</p>
-                    <p class="card-text"><strong>Tahun Kelulusan:</strong> {{ optional($alumni->tahunLulus)->tahun_lulus }}</p>
-                    <p class="card-text"><strong>Status Alumni:</strong> {{ optional($alumni->statusAlumni)->status }}</p>
+                    <p class="card-text"><strong>Nama Lengkap:</strong> {{ $alumni->nama_depan ?? 'Data Belum Diisi' }} {{ $alumni->nama_belakang ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>NISN:</strong> {{ $alumni->nisn ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>NIK:</strong> {{ $alumni->nik ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Jenis Kelamin:</strong> {{ $alumni->jenis_kelamin ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Tempat Lahir:</strong> {{ $alumni->tempat_lahir ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Tanggal Lahir:</strong> {{ $alumni->tgl_lahir ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Tahun Kelulusan:</strong> {{ optional($alumni->tahunLulus)->tahun_lulus ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Status Alumni:</strong> {{ optional($alumni->statusAlumni)->status ?? 'Data Belum Diisi' }}</p>
                 </div>
                 <div class="col-md-6">
-                    <p class="card-text"><strong>Alamat:</strong> {{ $alumni->alamat }}</p>
-                    <p class="card-text"><strong>Nomor Telepon:</strong> {{ $alumni->no_hp }}</p>
-                    <p class="card-text"><strong>Akun Facebook:</strong> {{ $alumni->akun_fb }}</p>
-                    <p class="card-text"><strong>Akun Instagram:</strong> {{ $alumni->akun_ig }}</p>
-                    <p class="card-text"><strong>Akun TikTok:</strong> {{ $alumni->akun_tiktok }}</p>
-                    <p class="card-text"><strong>Surel:</strong> {{ $alumni->email }}</p>
-                    <p class="card-text"><strong>Kata Sandi:</strong> {{ $alumni->password }}</p>
-                    <p class="card-text"><strong>Konsentrasi Keahlian:</strong> {{ optional($alumni->konsentrasiKeahlian)->konsentrasi_keahlian }}</p>
+                    <p class="card-text"><strong>Alamat:</strong> {{ $alumni->alamat ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Nomor Telepon:</strong> {{ $alumni->no_hp ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Akun Facebook:</strong> {{ $alumni->akun_fb ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Akun Instagram:</strong> {{ $alumni->akun_ig ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Akun TikTok:</strong> {{ $alumni->akun_tiktok ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Surel:</strong> {{ $alumni->email ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Kata Sandi:</strong> {{ $alumni->password ?? 'Data Belum Diisi' }}</p>
+                    <p class="card-text"><strong>Konsentrasi Keahlian:</strong> {{ optional($alumni->konsentrasiKeahlian)->konsentrasi_keahlian ?? 'Data Belum Diisi' }}</p>
                 </div>
             </div>
         </div>

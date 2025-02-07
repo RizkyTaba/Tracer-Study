@@ -87,10 +87,10 @@ class AlumniController extends Controller
             'alamat' => 'required|max:50',
             'no_hp' => 'required|max:15',
             'email' => 'required|email|max:50',
-            'password' => 'nullable|min:8', // Password is nullable and must be at least 8 characters if provided
-            'akun_fb' => 'nullable|max:50',
-            'akun_ig' => 'nullable|max:50',
-            'akun_tiktok' => 'nullable|max:50',
+            'password' => 'nullable|min:8', // Password is nullable
+            'akun_fb' => 'nullable|max:50', // Allow empty
+            'akun_ig' => 'nullable|max:50', // Allow empty
+            'akun_tiktok' => 'nullable|max:50', // Allow empty
             'status_login' => 'required|in:0,1',
         ]);
 

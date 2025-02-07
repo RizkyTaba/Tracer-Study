@@ -399,5 +399,46 @@ class UserController extends Controller
                 ->with('error', 'Gagal menghapus data pekerjaan');
         }
     }
-    
+
+    public function editAlumni()
+    {
+        // Get the authenticated user's alumni data
+        $alumni = Alumni::where('email', Auth::user()->email)->first();
+
+        // If alumni not found, redirect with an error
+        if (!$alumni) {
+            return redirect()->back()->with('error', 'Data alumni tidak ditemukan');
+        }
+
+        return view('user.editAlumni', compact('alumni'));
+    }
+
+    public function updateAlumni(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'alamat' => 'required|string|max:50',
+            'no_hp' => 'required|string|max:15',
+            'akun_fb' => 'nullable|string|max:50',
+            'akun_ig' => 'nullable|string|max:50',
+            'akun_tiktok' => 'nullable|string|max:50',
+            'email' => 'required|email|max:50|unique:tbl_alumni,email,' . $id . ',id_alumni',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        $alumni = Alumni::findOrFail($id);
+        $alumni->alamat = $request->alamat;
+        $alumni->no_hp = $request->no_hp;
+        $alumni->akun_fb = $request->akun_fb;
+        $alumni->akun_ig = $request->akun_ig;
+        $alumni->akun_tiktok = $request->akun_tiktok;
+        $alumni->email = $request->email;
+
+        if ($request->filled('password')) {
+            $alumni->password = bcrypt($request->password);
+        }
+
+        $alumni->save();
+
+        return redirect()->route('user.profil')->with('success', 'Data alumni berhasil diperbarui');
+    }
 }

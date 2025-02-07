@@ -39,7 +39,7 @@
                     <label for="nisn" class="form-label">
                         <i class="fas fa-id-card"></i> NISN
                     </label>
-                    <input type="text" class="form-control" id="nisn" name="nisn" placeholder="Masukkan NISN" required>
+                    <input type="text" class="form-control" id="nisn" name="nisn" placeholder="Masukkan NISN" required readonly>
                 </div>
 
                 <!-- NIK -->
@@ -47,7 +47,7 @@
                     <label for="nik" class="form-label">
                         <i class="fas fa-id-badge"></i> NIK
                     </label>
-                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK" required>
+                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK" required readonly>
                 </div>
 
                 <!-- Nama Depan -->
@@ -78,14 +78,6 @@
                     </select>
                 </div>
 
-                <!-- Tempat Lahir -->
-                <div class="mb-3">
-                    <label for="tempat_lahir" class="form-label">
-                        <i class="fas fa-map-marker-alt"></i> Tempat Lahir
-                    </label>
-                    <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required>
-                </div>
-
                 <!-- Tanggal Lahir -->
                 <div class="mb-3">
                     <label for="tgl_lahir" class="form-label">
@@ -93,7 +85,17 @@
                     </label>
                     <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required>
                 </div>
+
+                <!-- Nomor HP -->
+                <div class="mb-3">
+                    <label for="no_hp" class="form-label">
+                        <i class="fas fa-phone"></i> Nomor HP
+                    </label>
+                    <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan Nomor HP" required>
+                </div>
             </div>
+
+            
 
             <!-- Kolom Kanan -->
             <div class="col-md-6">
@@ -105,12 +107,12 @@
                     <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat" required>
                 </div>
 
-                <!-- Nomor HP -->
+                <!-- Tempat Lahir -->
                 <div class="mb-3">
-                    <label for="no_hp" class="form-label">
-                        <i class="fas fa-phone"></i> Nomor HP
+                    <label for="tempat_lahir" class="form-label">
+                        <i class="fas fa-map-marker-alt"></i> Tempat Lahir
                     </label>
-                    <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan Nomor HP" required>
+                    <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required>
                 </div>
 
                 <!-- Email -->
@@ -250,7 +252,8 @@ $(document).ready(function() {
                            data-nama-belakang="${student.nama_belakang || ''}"
                            data-alamat="${student.alamat}"
                            data-tempat-lahir="${student.tempat_lahir}">
-                            ${student.nama_depan} ${student.nama_belakang || ''} - ${student.alamat}
+                            ${student.nama_depan} ${student.nama_belakang || ''} - ${student.alamat} <br>
+                            Tempat Lahir: ${student.tempat_lahir} | NISN: ${student.nisn} | NIK: ${student.nik}
                         </a>
                     `);
                 });
