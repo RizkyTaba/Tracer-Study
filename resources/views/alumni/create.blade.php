@@ -5,7 +5,31 @@
 @section('content')
 <div class="container mt-4">
     <h2 class="mb-4">Tambah Alumni</h2>
-    <form action="{{ route('alumni.store') }}" method="POST" class="animated-form">
+    
+    <!-- Pencarian -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="mb-3">
+                <label for="searchStudent" class="form-label">
+                    <i class="fas fa-search"></i> Cari Data Siswa
+                </label>
+                <div class="input-group">
+                    <input type="text" 
+                           class="form-control" 
+                           id="searchStudent" 
+                           placeholder="Cari berdasarkan nama, alamat, atau tempat lahir...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" id="searchButton">
+                            <i class="fas fa-search"></i> Cari
+                        </button>
+                    </div>
+                </div>
+                <div id="searchResults" class="list-group mt-2" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <form action="{{ route('alumni.store') }}" method="POST">
         @csrf
         <div class="row">
             <!-- Kolom Kiri -->
@@ -192,19 +216,68 @@
 </div>
 @endsection
 
-<style>
-    .animated-form {
-        animation: slideIn 0.5s ease-in-out;
-    }
-
-    @keyframes slideIn {
-        from {
-            transform: translateY(-20px);
-            opacity: 0;
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    let searchTimeout;
+    
+    $('#searchStudent').on('input', function() {
+        clearTimeout(searchTimeout);
+        const searchTerm = $(this).val();
+        
+        if (searchTerm.length >= 3) {
+            searchTimeout = setTimeout(function() {
+                searchStudents(searchTerm);
+            }, 500);
+        } else {
+            $('#searchResults').hide();
         }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
+    });
+    
+    function searchStudents(term) {
+        $.get(`{{ route('admin.search.student') }}`, { search: term }, function(data) {
+            const results = $('#searchResults');
+            results.empty();
+            
+            if (data.length > 0) {
+                data.forEach(student => {
+                    results.append(`
+                        <a href="#" class="list-group-item list-group-item-action student-item" 
+                           data-nisn="${student.nisn}"
+                           data-nik="${student.nik}"
+                           data-nama-depan="${student.nama_depan}"
+                           data-nama-belakang="${student.nama_belakang || ''}"
+                           data-alamat="${student.alamat}"
+                           data-tempat-lahir="${student.tempat_lahir}">
+                            ${student.nama_depan} ${student.nama_belakang || ''} - ${student.alamat}
+                        </a>
+                    `);
+                });
+                results.show();
+            } else {
+                results.html('<div class="list-group-item">Tidak ada hasil ditemukan</div>');
+                results.show();
+            }
+        });
     }
-</style>
+    
+    $(document).on('click', '.student-item', function(e) {
+        e.preventDefault();
+        const student = $(this);
+        
+        // Fill the form fields
+        $('#nisn').val(student.data('nisn'));
+        $('#nik').val(student.data('nik'));
+        $('#nama_depan').val(student.data('nama-depan'));
+        $('#nama_belakang').val(student.data('nama-belakang'));
+        $('#alamat').val(student.data('alamat'));
+        $('#tempat_lahir').val(student.data('tempat-lahir'));
+        
+        // Hide search results
+        $('#searchResults').hide();
+        $('#searchStudent').val('');
+    });
+});
+</script>
+@endsection

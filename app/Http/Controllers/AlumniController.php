@@ -8,6 +8,7 @@ use App\Models\TahunLulus;
 use App\Models\KonsentrasiKeahlian;
 use App\Models\StatusAlumni;
 use App\Models\User;
+use App\Models\RawStudentData;
 
 class AlumniController extends Controller
 {
@@ -22,8 +23,8 @@ class AlumniController extends Controller
         $tahunLulus = TahunLulus::all();
         $konsentrasiKeahlian = KonsentrasiKeahlian::all();
         $statusAlumni = StatusAlumni::all();
-        $dataSiswa = DataAlumni::all(); // Get all student data
-        return view('alumni.create', compact('tahunLulus', 'konsentrasiKeahlian', 'statusAlumni', 'dataSiswa'));
+        $rawStudentData = RawStudentData::all();
+        return view('alumni.create', compact('tahunLulus', 'konsentrasiKeahlian', 'statusAlumni', 'rawStudentData'));
     }
 
     public function store(Request $request)
@@ -155,6 +156,18 @@ class AlumniController extends Controller
         return view('alumni.show', compact('alumni'));
     }
 
-    // Remove the belongsTo relationship from the controller
-    
+    public function searchStudent(Request $request)
+    {
+        $query = RawStudentData::query();
+        
+        if ($request->search) {
+            $query->where('nama_depan', 'LIKE', "%{$request->search}%")
+                  ->orWhere('nama_belakang', 'LIKE', "%{$request->search}%")
+                  ->orWhere('alamat', 'LIKE', "%{$request->search}%")
+                  ->orWhere('tempat_lahir', 'LIKE', "%{$request->search}%");
+        }
+        
+        $students = $query->get();
+        return response()->json($students);
+    }
 }

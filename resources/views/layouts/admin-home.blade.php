@@ -277,5 +277,6 @@
         // Panggil fungsi checkSidebarState saat halaman dimuat
         document.addEventListener('DOMContentLoaded', checkSidebarState);
     </script>
+    @yield('scripts')
 </body>
 </html>

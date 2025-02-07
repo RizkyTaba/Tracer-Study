@@ -112,6 +112,8 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
      // Testimoni
      Route::get('admin/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
      Route::resource('testimoni', TestimoniController::class)->except(['index']);
+
+    Route::get('/admin/search-student', [AlumniController::class, 'searchStudent'])->name('admin.search.student');
 });
 
 require __DIR__.'/auth.php';
