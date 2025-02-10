@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 
 class AdminController extends Controller
@@ -56,5 +57,33 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/admin/login');
+    }
+
+    public function editProfile()
+    {
+        return view('admin.profile.edit', ['user' => Auth::user()]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->back()->withErrors(['error' => 'User not authenticated.']);
+        }
+
+        $user->email = $request->email;
+
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+        return redirect()->route('admin.dashboard')->with('success', 'Profil berhasil diperbarui.');
     }
 }

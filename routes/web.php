@@ -115,6 +115,9 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
      Route::resource('testimoni', TestimoniController::class)->except(['index']);
 
     Route::get('/admin/search-student', [AlumniController::class, 'searchStudent'])->name('admin.search.student');
+
+    Route::get('/admin/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
+    Route::patch('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
 });
 
 require __DIR__.'/auth.php';

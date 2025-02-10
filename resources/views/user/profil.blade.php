@@ -63,7 +63,7 @@
                     <p class="card-text"><strong>Akun Instagram:</strong> {{ $alumni->akun_ig ?? 'Belum Ada Data' }}</p>
                     <p class="card-text"><strong>Akun TikTok:</strong> {{ $alumni->akun_tiktok ?? 'Belum Ada Data' }}</p>
                     <p class="card-text"><strong>Email:</strong> {{ $alumni->email ?? 'Belum Ada Data' }}</p>
-                    <p class="card-text"><strong>Password:</strong> {{ $alumni->password ?? 'Belum Ada Data' }}</p>
+                    {{-- <p class="card-text"><strong>Password:</strong> {{ $alumni->password ?? 'Belum Ada Data' }}</p> --}}
                     <p class="card-text"><strong>Konsentrasi Keahlian:</strong> {{ optional($alumni->konsentrasiKeahlian)->konsentrasi_keahlian ?? 'Belum Ada Data' }}</p>
                 </div>
             </div>

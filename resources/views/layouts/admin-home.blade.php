@@ -224,9 +224,11 @@
             <header>
                 <div class="d-flex justify-content-between align-items-center">
                     <h1>@yield('title')</h1>
-                    <div class="user-info">
+                    <div class="user-info d-flex align-items-center">
                         @auth
-                            <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->name }}
+                            <i class="bi bi-person-circle me-2"></i> 
+                            <span class="me-5">{{ Auth::user()->name }}</span>
+                            <a href="{{ route('admin.profile.edit') }}" class="btn btn-link">Edit Profil</a>
                         @endauth
                     </div>
                 </div>

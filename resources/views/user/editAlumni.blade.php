@@ -195,35 +195,40 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $alumni->alamat }}" required>
+                        <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $alumni->alamat }}" placeholder="Masukkan Alamat" required>
                     </div>
                     <div class="form-group">
                         <label for="no_hp">No. HP</label>
-                        <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{ $alumni->no_hp }}" required>
+                        <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{ $alumni->no_hp }}" placeholder="Masukkan No. HP" required>
                     </div>
                     <div class="form-group">
-                        <label for="akun_fb">Akun Facebook</label>
-                        <input type="text" class="form-control" id="akun_fb" name="akun_fb" value="{{ $alumni->akun_fb }}">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $alumni->email }}" placeholder="Masukkan Email" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label for="akun_fb">Akun Facebook</label>
+                        <input type="text" class="form-control" id="akun_fb" name="akun_fb" value="{{ $alumni->akun_fb }}" placeholder="Masukkan Akun Facebook">
+                    </div>
+                    <div class="form-group">
                         <label for="akun_ig">Akun Instagram</label>
-                        <input type="text" class="form-control" id="akun_ig" name="akun_ig" value="{{ $alumni->akun_ig }}">
+                        <input type="text" class="form-control" id="akun_ig" name="akun_ig" value="{{ $alumni->akun_ig }}" placeholder="Masukkan Akun Instagram">
+
                     </div>
                     <div class="form-group">
                         <label for="akun_tiktok">Akun TikTok</label>
-                        <input type="text" class="form-control" id="akun_tiktok" name="akun_tiktok" value="{{ $alumni->akun_tiktok }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ $alumni->email }}" required>
+                        <input type="text" class="form-control" id="akun_tiktok" name="akun_tiktok" value="{{ $alumni->akun_tiktok }}" placeholder="Masukkan Akun TikTok">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Leave blank to keep current password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Kosongkan untuk mempertahankan password saat ini">
+            </div>
+            <div class="form-group">
+                <label for="password_confirmation">Konfirmasi Password</label>
+                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Masukkan ulang password baru">
             </div>
             <div class="text-right">
                 <button type="submit" class="btn btn-primary">
